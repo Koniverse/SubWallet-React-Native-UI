@@ -87,7 +87,7 @@
     "react-dom": "17.0.2",
     "react-github-button": "^0.1.9",
     "react-intl": "^2.2.3",
-    "react-native": "0.64.2",
+    "react-native": "0.64.4",
     "react-native-gesture-handler": "~2.2.1",
     "react-native-mocker": "^0.0.12",
     "react-native-reanimated": "^2.2.0",
