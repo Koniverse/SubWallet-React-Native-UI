@@ -57,6 +57,13 @@
     "@react-native-picker/picker": "^2.4.8",
     "@react-navigation/native": "^6.1.1",
     "@react-navigation/stack": "^6.3.10",
+    "@storybook/addon-actions": "^5.3",
+    "@storybook/addon-knobs": "^5.3",
+    "@storybook/addon-links": "^5.3",
+    "@storybook/addon-ondevice-actions": "^5.3.23",
+    "@storybook/addon-ondevice-knobs": "^5.3.26",
+    "@storybook/react-native": "^5.3.27",
+    "@storybook/react-native-server": "^5.3.23",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-native": "^7.2.0",
     "@types/jest": "^26.0.23",
@@ -69,6 +76,7 @@
     "antd-mobile-demo-data": "^0.2.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
+    "babel-loader": "^8.3.0",
     "bisheng": "^3.1.0-beta.4",
     "concurrently": "^4.0.1",
     "cross-env": "^7.0.3",
@@ -81,6 +89,7 @@
     "metro-react-native-babel-preset": "^0.66.0",
     "mockdate": "^2.0.1",
     "pre-commit": "1.x",
+    "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-copy-to-clipboard": "^5.0.0",
     "react-document-title": "^2.0.1",
@@ -133,7 +142,9 @@
     "lint-staged": "lint-staged",
     "lint-staged:ts": "npm run tsc && eslint components/**/*.tsx",
     "lint-staged:es": "eslint ./.eslintrc.js",
-    "tsc": "antd-tools run tsc"
+    "tsc": "antd-tools run tsc",
+    "storybook": "start-storybook -p 7007",
+    "build-storybook": "build-storybook"
   },
   "lint-staged": {
     "components/**/*.tsx": [
