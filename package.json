@@ -31,7 +31,6 @@
   "main": "lib/index.js",
   "module": "es/index.js",
   "dependencies": {
-    "@ant-design/icons-react-native": "^2.3.1",
     "@bang88/react-native-ultimate-listview": "^4.1.0",
     "@types/shallowequal": "^1.1.1",
     "array-tree-filter": "~2.1.0",
@@ -46,6 +45,7 @@
     "utility-types": "^3.10.0"
   },
   "devDependencies": {
+    "@ant-design/icons-react-native": "^2.3.2",
     "@ant-design/tools": "^13.4.1-beta.0",
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
@@ -88,6 +88,8 @@
     "lint-staged": "^8.0.4",
     "metro-react-native-babel-preset": "0.72.3",
     "mockdate": "^2.0.1",
+    "patch-package": "^6.5.0",
+    "postinstall-postinstall": "^2.1.0",
     "pre-commit": "1.x",
     "prop-types": "^15.8.1",
     "react": "18.1.0",
@@ -137,12 +139,13 @@
     "rn-start": "node scripts/start.js",
     "ios": "concurrently \"npm run watch-tsc\" \"npm run _ios\"",
     "android": "concurrently \"npm run watch-tsc\" \"npm run _android\"",
-    "_ios": "npx react-native run-ios --project-path rn-kitchen-sink/ios --scheme KitchenSink",
+    "_ios": "npx react-native run-ios --scheme KitchenSink",
     "_android": "react-native run-android",
     "lint-staged": "lint-staged",
     "lint-staged:ts": "npm run tsc && eslint components/**/*.tsx",
     "lint-staged:es": "eslint ./.eslintrc.js",
     "tsc": "antd-tools run tsc",
+    "postinstall": "patch-package",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
   },
