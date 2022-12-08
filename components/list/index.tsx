@@ -25,8 +25,8 @@ export default class List extends React.Component<ListProps, any> {
     return (
       <WithTheme styles={styles} themeStyles={listStyles}>
         {(s) => {
-          let headerDom: React.ReactElement<any> | null = null
-          let footerDom: React.ReactElement<any> | null = null
+          let headerDom: React.ReactNode | null = null
+          let footerDom: React.ReactNode | null = null
 
           if (renderHeader) {
             let content =

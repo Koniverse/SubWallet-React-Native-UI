@@ -1,4 +1,5 @@
 import { StyleProp, TextStyle, ViewStyle } from 'react-native'
+import { ReactNode } from 'react'
 
 export type PickerProps = {
   disabled?: boolean
@@ -11,4 +12,5 @@ export type PickerProps = {
   style?: StyleProp<ViewStyle>
   onScrollChange?: (value: any) => void
   noAnimate?: boolean
+  children: ReactNode
 }

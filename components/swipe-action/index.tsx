@@ -47,8 +47,8 @@ interface SwipeableProps
    * To support `rtl` flexbox layouts use `flexDirection` styling.
    * */
   renderLeftActions?: (
-    progressAnimatedValue: Animated.AnimatedInterpolation,
-    dragAnimatedValue: Animated.AnimatedInterpolation,
+    progressAnimatedValue: Animated.AnimatedInterpolation<number | string>,
+    dragAnimatedValue: Animated.AnimatedInterpolation<number | string>,
   ) => React.ReactNode
   /**
    *
@@ -61,8 +61,8 @@ interface SwipeableProps
    * To support `rtl` flexbox layouts use `flexDirection` styling.
    * */
   renderRightActions?: (
-    progressAnimatedValue: Animated.AnimatedInterpolation,
-    dragAnimatedValue: Animated.AnimatedInterpolation,
+    progressAnimatedValue: Animated.AnimatedInterpolation<number | string>,
+    dragAnimatedValue: Animated.AnimatedInterpolation<number | string>,
   ) => React.ReactNode
   useNativeAnimations?: boolean
   animationOptions?: Record<string, unknown>
@@ -113,8 +113,8 @@ class SwipeAction extends React.Component<SwipeActionProps> {
   }
 
   renderActions = (
-    progress: Animated.AnimatedInterpolation,
-    _dragAnimatedValue: Animated.AnimatedInterpolation,
+    progress: Animated.AnimatedInterpolation<number | string>,
+    _dragAnimatedValue: Animated.AnimatedInterpolation<number | string>,
     isLeft = false,
   ) => {
     const { right, left, buttonWidth = 60 } = this.props

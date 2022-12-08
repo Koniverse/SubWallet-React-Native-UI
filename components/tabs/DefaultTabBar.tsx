@@ -219,7 +219,7 @@ export class DefaultTabBar extends React.PureComponent<PropsType, StateType> {
 
   getTabs = (styles: TabBarStyle, theme: Theme) => {
     const { tabs, page = 0 } = this.props
-    return tabs.map((name, index) => {
+    return tabs.map(({ name }, index) => {
       let tab = { title: name } as TabData
       if (tabs.length - 1 >= index) {
         tab = tabs[index]

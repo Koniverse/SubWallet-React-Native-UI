@@ -49,6 +49,7 @@ export interface IModalPropTypes {
   onClose?: () => void // onDismiss
   onAnimationEnd?: (visible: boolean) => void // onShow
   onRequestClose?: CallbackOnBackHandler
+  children: React.ReactNode
 }
 
 export default class RCModal extends React.Component<IModalPropTypes, any> {

@@ -2,6 +2,7 @@ import React, { isValidElement } from 'react'
 import {
   Image,
   ImageStyle,
+  ImageURISource,
   StyleProp,
   Text,
   TouchableWithoutFeedback,
@@ -71,7 +72,10 @@ export default class TabBarItem extends React.Component<TabBarItemProps, any> {
                 source
               )
             ) : (
-              <Image source={source} style={[styles.barIcon, iconStyle]} />
+              <Image
+                source={source as ImageURISource | ImageURISource[]}
+                style={[styles.barIcon, iconStyle]}
+              />
             )}
             {badgeDom}
           </View>
