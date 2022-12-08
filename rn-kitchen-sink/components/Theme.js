@@ -1,6 +1,6 @@
-import { presetPalettes } from 'ant-design-palettes'
 import React from 'react'
 import { Button, Flex, Icon, Modal } from '../../components'
+import {presetPalettes} from "@ant-design/colors";
 
 class ThemePanel extends React.Component {
   state = {

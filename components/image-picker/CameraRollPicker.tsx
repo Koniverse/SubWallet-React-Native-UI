@@ -5,7 +5,7 @@ import {
   Platform,
   StyleSheet,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native'
 import ListView from '../list-view'
 import ImageItem from './ImageItem'

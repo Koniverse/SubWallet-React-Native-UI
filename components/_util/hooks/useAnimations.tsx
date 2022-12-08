@@ -34,23 +34,20 @@ export function useAnimate(configure: ConfigureInterface) {
 // Animated.timing hook
 export function useAnimatedTiming(): [Animated.Value, animateType] {
   const animatedRef = React.useRef<Animated.CompositeAnimation | void>()
+  const animatedValRef = React.useRef(new Animated.Value(0))
 
   const animatedFunc = React.useCallback(
     ({ toValue = 1, duration = 200, easing, useNativeDriver = false }) => {
       animatedRef.current?.stop()
-      animatedRef.current = Animated.timing(animatedValue, {
+      animatedRef.current = Animated.timing(animatedValRef.current, {
         toValue,
         duration,
         easing,
         useNativeDriver,
       }).start()
     },
-    [animatedValue],
+    [],
   )
-  var [animatedValue] = useAnimate({
-    initialValue: 0,
-    animate: animatedFunc,
-  })
 
-  return [animatedValue, animatedFunc]
+  return [animatedValRef.current, animatedFunc]
 }
