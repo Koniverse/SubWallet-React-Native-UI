@@ -1,0 +1,74 @@
+diff --git a/node_modules/react-native-modal-popover/src/Popover.tsx b/node_modules/react-native-modal-popover/src/Popover.tsx
+index 87a449c..3c0846a 100644
+--- a/node_modules/react-native-modal-popover/src/Popover.tsx
++++ b/node_modules/react-native-modal-popover/src/Popover.tsx
+@@ -13,7 +13,7 @@ import {
+   ViewStyle,
+   StyleProp,
+   I18nManager,
+-  StatusBar,
++  StatusBar, EmitterSubscription,
+ } from 'react-native';
+ import {
+   computeGeometry,
+@@ -94,6 +94,7 @@ export interface PopoverProps {
+   useNativeDriver?: boolean;
+   supportedOrientations?: Orientation[];
+   calculateStatusBar?: boolean;
++  children?: React.ReactElement<any>;
+ }
+ 
+ export interface PopoverState extends Geometry {
+@@ -156,6 +157,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
+ 
+   private defaultDisplayArea!: Rect;
+ 
++  private dimensionListener: EmitterSubscription;
++
+   constructor(props: PopoverProps) {
+     super(props);
+     this.state = {
+@@ -171,11 +174,11 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
+   }
+ 
+   componentDidMount() {
+-    Dimensions.addEventListener('change', this.onOrientationChange);
++    this.dimensionListener = Dimensions.addEventListener('change', this.onOrientationChange);
+   }
+ 
+   componentWillUnmount() {
+-    Dimensions.removeEventListener('change', this.onOrientationChange);
++    this.dimensionListener?.remove && this.dimensionListener.remove();
+   }
+ 
+   private computeGeometry = (
+diff --git a/node_modules/react-native-modal-popover/src/PopoverController.tsx b/node_modules/react-native-modal-popover/src/PopoverController.tsx
+index a5e6e32..95c4d98 100644
+--- a/node_modules/react-native-modal-popover/src/PopoverController.tsx
++++ b/node_modules/react-native-modal-popover/src/PopoverController.tsx
+@@ -6,7 +6,7 @@ import {
+   MeasureOnSuccessCallback,
+   NativeModules,
+   I18nManager,
+-  StatusBar,
++  StatusBar, EmitterSubscription,
+ } from 'react-native';
+ import { Rect } from './PopoverGeometry';
+ 
+@@ -38,12 +38,14 @@ export class PopoverController extends React.PureComponent<Props, State> {
+     popoverAnchor: { x: 0, y: 0, width: 0, height: 0 },
+   };
+ 
++  private dimensionsListener: EmitterSubscription;
++
+   componentDidMount() {
+-    Dimensions.addEventListener('change', this.onOrientationChange);
++    this.dimensionsListener = Dimensions.addEventListener('change', this.onOrientationChange);
+   }
+ 
+   componentWillUnmount() {
+-    Dimensions.removeEventListener('change', this.onOrientationChange);
++    this.dimensionsListener?.remove && this.dimensionsListener.remove();
+   }
+ 
+   private onOrientationChange = () => {
