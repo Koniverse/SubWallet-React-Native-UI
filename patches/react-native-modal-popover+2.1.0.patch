@@ -43,7 +43,7 @@ index 87a449c..3c0846a 100644
  
    private computeGeometry = (
 diff --git a/node_modules/react-native-modal-popover/src/PopoverController.tsx b/node_modules/react-native-modal-popover/src/PopoverController.tsx
-index a5e6e32..95c4d98 100644
+index a5e6e32..5e83a2d 100644
 --- a/node_modules/react-native-modal-popover/src/PopoverController.tsx
 +++ b/node_modules/react-native-modal-popover/src/PopoverController.tsx
 @@ -6,7 +6,7 @@ import {
@@ -72,3 +72,85 @@ index a5e6e32..95c4d98 100644
    }
  
    private onOrientationChange = () => {
+@@ -67,8 +69,8 @@ export class PopoverController extends React.PureComponent<Props, State> {
+   };
+ 
+   private onTouchableMeasured: MeasureOnSuccessCallback = (
+-    x0,
+-    y0,
++    _x0,
++    _y0,
+     width,
+     height,
+     x,
+diff --git a/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx b/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx
+index cbb7526..9a31a9d 100644
+--- a/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx
++++ b/node_modules/react-native-modal-popover/src/PopoverTouchable.tsx
+@@ -1,7 +1,7 @@
+ import * as PropTypes from 'prop-types';
+ import * as React from 'react';
+ import {
+-  Dimensions,
++  Dimensions, EmitterSubscription,
+   findNodeHandle,
+   MeasureOnSuccessCallback,
+   NativeModules,
+@@ -10,6 +10,7 @@ import { Rect } from './PopoverGeometry';
+ 
+ export interface Props {
+   onPopoverDisplayed?: () => any;
++  children: React.ReactElement<any>
+ }
+ 
+ export interface State {
+@@ -21,6 +22,7 @@ export class PopoverTouchable extends React.PureComponent<Props, State> {
+   static propTypes = {
+     onPopoverDisplayed: PropTypes.func,
+   };
++  private dimensionListener: EmitterSubscription;
+ 
+   constructor(props: Props) {
+     super(props);
+@@ -33,11 +35,11 @@ export class PopoverTouchable extends React.PureComponent<Props, State> {
+   }
+ 
+   componentDidMount() {
+-    Dimensions.addEventListener('change', this.onOrientationChange);
++    this.dimensionListener = Dimensions.addEventListener('change', this.onOrientationChange);
+   }
+ 
+   componentWillUnmount() {
+-    Dimensions.removeEventListener('change', this.onOrientationChange);
++    this.dimensionListener?.remove && this.dimensionListener.remove();
+   }
+ 
+   private onOrientationChange = () => {
+@@ -61,8 +63,8 @@ export class PopoverTouchable extends React.PureComponent<Props, State> {
+   };
+ 
+   private onTouchableMeasured: MeasureOnSuccessCallback = (
+-    x0,
+-    y0,
++    _x0,
++    _y0,
+     width,
+     height,
+     x,
+diff --git a/node_modules/react-native-modal-popover/src/usePopover.ts b/node_modules/react-native-modal-popover/src/usePopover.ts
+index 2d05b78..dc946cc 100644
+--- a/node_modules/react-native-modal-popover/src/usePopover.ts
++++ b/node_modules/react-native-modal-popover/src/usePopover.ts
+@@ -78,9 +78,10 @@ export function usePopover(calculateStatusBar = false): UsePopoverHook {
+         requestAnimationFrame(openPopover);
+       }
+     };
+-    Dimensions.addEventListener('change', onOrientationChange);
++
++    const listerner = Dimensions.addEventListener('change', onOrientationChange);
+     return () => {
+-      Dimensions.removeEventListener('change', onOrientationChange);
++      listerner.remove();
+     };
+   }, [showPopover, openPopover]);
+ 

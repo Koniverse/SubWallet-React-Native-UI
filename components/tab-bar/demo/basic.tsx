@@ -10,7 +10,7 @@ export default class BasicTabBarExample extends React.Component<any, any> {
     }
   }
 
-  renderContent(pageText: any) {
+  renderContent(pageText: any): React.ReactElement<any> {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
         <SearchBar placeholder="Search" showCancelButton />

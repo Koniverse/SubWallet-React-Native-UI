@@ -6,7 +6,10 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import { Popover as Pop, PopoverController } from 'react-native-modal-popover'
+import {
+  Popover as Pop,
+  PopoverController,
+} from 'react-native-modal-popover/src'
 import { Placement } from 'react-native-modal-popover/lib/PopoverGeometry'
 import { WithTheme, WithThemeStyles } from '../style'
 import PopoverStyles, { PopoverStyle } from './style'
@@ -135,7 +138,7 @@ export default class Popover extends React.PureComponent<PopoverProps, any> {
                   easing={easing}
                   useNativeDriver={useNativeDriver}
                   onDismiss={onDismiss}>
-                  {this.renderOverlay(closePopover)}
+                  {this.renderOverlay(closePopover) as React.ReactElement<any>}
                 </Pop>
               </View>
             )}

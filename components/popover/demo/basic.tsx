@@ -1,6 +1,7 @@
 import React from 'react'
 import { Easing, StyleSheet, Text, View } from 'react-native'
 import { List, Popover } from '../../'
+import { Placement } from 'react-native-modal-popover/src/PopoverGeometry'
 
 const Item = Popover.Item
 
@@ -95,7 +96,7 @@ export default class PopoverExample extends React.Component<any, any> {
                   <Text>自定义组件 {p}</Text>
                 </Popover.Item>
               }
-              placement={p as any}>
+              placement={p as Placement}>
               <Text
                 style={{
                   margin: 16,
