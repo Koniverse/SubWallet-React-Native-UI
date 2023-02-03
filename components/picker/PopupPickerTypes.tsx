@@ -24,5 +24,5 @@ export type PopupPickerProps = {
   transitionName?: string
   popupTransitionName?: string
   maskTransitionName?: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
