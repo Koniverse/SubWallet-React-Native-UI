@@ -1,3 +1,6 @@
+import './button/Button.stories'
+import './icon/Icon.stories'
+import './Welcome/Welcome.stories'
 export { default as Accordion } from './accordion/index'
 export { default as ActionSheet } from './action-sheet/index'
 export { default as ActivityIndicator } from './activity-indicator/index'
