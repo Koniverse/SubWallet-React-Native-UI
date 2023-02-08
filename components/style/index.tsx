@@ -1,4 +1,5 @@
-import React from 'react'
+import { ConfigProvider } from '@subwallet/react-ui'
+import React, { useContext } from 'react'
 import shallowequal from 'shallowequal'
 import defaultTheme from './themes/default'
 
@@ -11,7 +12,16 @@ export interface ThemeProviderProps {
 }
 export const ThemeProvider = (props: ThemeProviderProps) => {
   const { value, children } = props
-  const theme = React.useMemo(() => ({ ...defaultTheme, ...value }), [value])
+  const swThemeContext = useContext(ConfigProvider.ConfigContext)
+  const theme = React.useMemo(
+    () => ({
+      ...defaultTheme,
+      logoMap: swThemeContext.theme?.logoMap,
+      ...swThemeContext.theme?.token,
+      ...value,
+    }),
+    [value, swThemeContext],
+  )
   return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
 }
 export interface UseThemeContextProps {

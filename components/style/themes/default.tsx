@@ -1,7 +1,7 @@
 const brandPrimary = '#108ee9'
 const brandPrimaryTap = '#1284d6'
 
-export default {
+const defaultSeed = {
   // 支付宝钱包默认主题
   // https://github.com/ant-design/ant-design-mobile/wiki/设计变量表及命名规范
 
@@ -189,3 +189,5 @@ export default {
   popup_zindex: 999,
   modal_zindex: 999,
 }
+
+export default { ...defaultSeed }
