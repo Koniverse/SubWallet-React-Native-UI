@@ -1,12 +1,9 @@
-import { CameraRoll } from '@react-native-camera-roll/camera-roll'
-import React, { Component } from 'react'
 import {
-  GetPhotosParamType,
-  Platform,
-  StyleSheet,
-  View,
-  ViewStyle,
-} from 'react-native'
+  CameraRoll,
+  GetPhotosParams,
+} from '@react-native-camera-roll/camera-roll'
+import React, { Component } from 'react'
+import { Platform, StyleSheet, View, ViewStyle } from 'react-native'
 import ListView from '../list-view'
 import ImageItem from './ImageItem'
 
@@ -32,7 +29,7 @@ const styles = StyleSheet.create<CameraRollPickerStyle>({
   spinner: {},
 })
 
-export interface CameraRollPickerProps extends GetPhotosParamType {
+export interface CameraRollPickerProps extends GetPhotosParams {
   maximum: number
   selectSingleItem?: boolean
   imagesPerRow: number
@@ -87,7 +84,7 @@ class CameraRollPicker extends Component<
     try {
       const { assetType, groupTypes, first, groupName, mimeTypes } = this.props
 
-      const params: GetPhotosParamType = {
+      const params: GetPhotosParams = {
         first,
         after: this.after,
         assetType: assetType,

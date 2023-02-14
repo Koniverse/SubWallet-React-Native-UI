@@ -6,6 +6,7 @@ import {
   configure,
   getStorybookUI,
 } from '@storybook/react-native'
+const stories = require('../components')
 
 import './rn-addons'
 
@@ -13,9 +14,7 @@ import './rn-addons'
 addDecorator(withKnobs)
 
 // import stories
-configure(() => {
-  require('../components')
-}, module)
+configure(() => stories, module)
 
 // Refer to https://github.com/storybookjs/react-native/tree/master/app/react-native#getstorybookui-options
 // To find allowed options for getStorybookUI

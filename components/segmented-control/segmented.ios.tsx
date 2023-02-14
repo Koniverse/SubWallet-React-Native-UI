@@ -1,4 +1,4 @@
-import SegmentedControlIOS from '@react-native-community/segmented-control'
+import { SegmentedControlComponent } from '@react-native-community/segmented-control'
 import React from 'react'
 import { StyleProp, ViewStyle } from 'react-native'
 import { WithTheme } from '../style'
@@ -27,7 +27,7 @@ export default class SegmentedControl extends React.Component<
     return (
       <WithTheme>
         {(_, theme) => (
-          <SegmentedControlIOS
+          <SegmentedControlComponent
             tintColor={tintColor || theme.segmented_control_color}
             selectedIndex={selectedIndex}
             activeFontStyle={{ color: selectedTextColor }}
