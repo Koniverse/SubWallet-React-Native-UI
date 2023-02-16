@@ -1,44 +1,77 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import {
-  IconOutline,
-  OutlineGlyphMapType,
-} from '@ant-design/icons-react-native'
+  FontAwesomeIcon,
+  FontAwesomeIconStyle,
+} from '@fortawesome/react-native-fontawesome'
+import { SizeType } from '@subwallet/react-ui/es/config-provider/SizeContext'
+import { IconProps } from 'phosphor-react-native'
+import { IconWeight } from 'phosphor-react-native/lib/typescript'
 import React from 'react'
-import { TextProps } from 'react-native'
-import { WithTheme } from '../style'
-export type IconNames = OutlineGlyphMapType
-export interface IconProps extends TextProps {
-  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | number
-  color?: string
-  name: IconNames
+import { StyleProp, TextProps, ViewStyle } from 'react-native'
+
+export interface SWIconProps extends TextProps {
+  customSize?: number
+  fontawesomeIcon?: IconProp
+  iconColor?: string
+  phosphorIcon?: React.ElementType<IconProps>
+  size?: SizeType
+  style?: StyleProp<ViewStyle>
+  type?: 'fontAwesome' | 'phosphor'
+  weight?: IconWeight
 }
 
-export default class Icon extends React.Component<IconProps, any> {
-  static defaultProps = {
-    size: 'md',
-  }
-  static displayName = 'Icon'
-  render() {
-    const { size, color, name, ...rest } = this.props
-    const sizeMap: { [key: string]: number } = {
-      xxs: 15,
-      xs: 18,
-      sm: 21,
-      md: 22,
-      lg: 36,
+const Icon: React.FC<SWIconProps> = ({
+  customSize,
+  fontawesomeIcon,
+  iconColor,
+  phosphorIcon: PhosphorIcon,
+  size,
+  style,
+  type = 'phosphor',
+  weight,
+}) => {
+  function getStyle(): FontAwesomeIconStyle {
+    return {
+      ...(Array.isArray(style) ? Object.assign({}, ...style) : style),
     }
-    const fontSize = typeof size === 'string' ? sizeMap[size] : size
+  }
 
+  function getIconSize() {
+    if (!size) {
+      return undefined
+    }
+    if (size === 'xs') {
+      return 16
+    }
+    if (size === 'sm') {
+      return 24
+    }
+
+    return 32
+  }
+
+  if (type === 'fontAwesome' && fontawesomeIcon) {
     return (
-      <WithTheme>
-        {(_, theme) => (
-          <IconOutline
-            size={fontSize}
-            color={color || theme.color_icon_base}
-            name={name}
-            {...rest}
-          />
-        )}
-      </WithTheme>
+      <FontAwesomeIcon
+        icon={fontawesomeIcon}
+        style={getStyle()}
+        size={customSize || getIconSize()}
+        color={iconColor}
+      />
     )
   }
+
+  if (type === 'phosphor' && PhosphorIcon) {
+    return (
+      <PhosphorIcon
+        size={customSize || getIconSize()}
+        color={iconColor}
+        weight={weight}
+      />
+    )
+  }
+
+  return <></>
 }
+
+export default Icon
