@@ -52,9 +52,7 @@ export default class BasicRadioExample extends React.Component<any, any> {
         <List
           renderHeader="不可用"
           renderFooter={
-            <Button type="primary" onPress={this.toggleDisabled}>
-              Toggle disabled
-            </Button>
+            <Button onPress={this.toggleDisabled}>Toggle disabled</Button>
           }>
           <List.Item>
             <Flex>

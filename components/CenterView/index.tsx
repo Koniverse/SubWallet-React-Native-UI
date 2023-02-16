@@ -26,7 +26,7 @@ const ThemePanel: React.FC<ThemePanelProps> = ({
             marginRight: 10,
             marginBottom: 10,
           }}
-          type={newTheme === palettes ? 'primary' : undefined}
+          type={newTheme === palettes ? 'ghost' : undefined}
           key={palettes}
           onPress={() => {
             changeTheme(

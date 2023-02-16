@@ -12,7 +12,6 @@ export default class PopoverExample extends React.Component<any, any> {
           onPress={() => {
             Portal.remove(key)
           }}
-          type="primary"
           style={{
             position: 'absolute',
             top: 100,

@@ -27,9 +27,7 @@ export default class SwitchExample extends React.Component<any, any> {
           </List.Item>
           <WhiteSpace />
           <WingBlank>
-            <Button type="primary" onPress={this.toggle}>
-              Toggle disabled
-            </Button>
+            <Button onPress={this.toggle}>Toggle disabled</Button>
           </WingBlank>
         </List>
         <List renderHeader="文字和图标">

@@ -20,16 +20,8 @@ export interface ResultNativeProps
 
 export default class Result extends React.Component<ResultNativeProps, any> {
   render() {
-    const {
-      style,
-      img,
-      imgUrl,
-      title,
-      message,
-      buttonText,
-      onButtonClick,
-      buttonType,
-    } = this.props
+    const { style, img, imgUrl, title, message, buttonText, onButtonClick } =
+      this.props
     return (
       <WithTheme styles={this.props.styles} themeStyles={ResultStyles}>
         {(styles) => {
@@ -72,7 +64,7 @@ export default class Result extends React.Component<ResultNativeProps, any> {
                 <View style={styles.buttonWrap}>
                   <Button
                     style={styles.button}
-                    type={buttonType}
+                    type={'ghost'}
                     onPress={onButtonClick}>
                     {buttonText}
                   </Button>

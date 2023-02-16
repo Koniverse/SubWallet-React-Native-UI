@@ -2,146 +2,232 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Theme } from '../../style'
 export interface ButtonStyles {
   container: ViewStyle
-  defaultHighlight: ViewStyle
+  blockButtonRaw: ViewStyle
+  centerContentAlign: ViewStyle
+  leftContentAlign: ViewStyle
   primaryHighlight: ViewStyle
-  ghostHighlight: ViewStyle
+  secondaryHighlight: ViewStyle
   warningHighlight: ViewStyle
+  dangerHighlight: ViewStyle
+  ghostHighlight: ViewStyle
   wrapperStyle: ViewStyle
-  largeRaw: ViewStyle
-  smallRaw: ViewStyle
-  defaultRaw: ViewStyle
-  primaryRaw: ViewStyle
+  xsRaw: ViewStyle
+  smRaw: ViewStyle
+  mdRaw: ViewStyle
+  lgRaw: ViewStyle
+  xsIconOnly: ViewStyle
+  smIconOnly: ViewStyle
+  mdIconOnly: ViewStyle
+  lgIconOnly: ViewStyle
+  defaultShapeRaw: ViewStyle
+  squareShapeRaw: ViewStyle
+  roundShapeRaw: ViewStyle
+  circleShapeRaw: ViewStyle
   ghostRaw: ViewStyle
+  primaryRaw: ViewStyle
+  secondaryRaw: ViewStyle
   warningRaw: ViewStyle
-  defaultDisabledRaw: ViewStyle
+  dangerRaw: ViewStyle
   primaryDisabledRaw: ViewStyle
-  ghostDisabledRaw: ViewStyle
+  secondaryDisabledRaw: ViewStyle
   warningDisabledRaw: ViewStyle
-  defaultHighlightText: TextStyle
-  primaryHighlightText: TextStyle
-  ghostHighlightText: TextStyle
-  warningHighlightText: TextStyle
-  largeRawText: TextStyle
-  smallRawText: TextStyle
-  defaultRawText: TextStyle
+  dangerDisabledRaw: ViewStyle
+  ghostDisabledRaw: ViewStyle
+  buttonRawText: TextStyle
   primaryRawText: TextStyle
-  ghostRawText: TextStyle
+  secondaryRawText: TextStyle
   warningRawText: TextStyle
-  defaultDisabledRawText: TextStyle
+  dangerRawText: TextStyle
+  ghostRawText: TextStyle
+  xsRawText: TextStyle
+  smRawText: TextStyle
+  mdRawText: TextStyle
+  lgRawText: TextStyle
   primaryDisabledRawText: TextStyle
+  secondaryDisabledRawText: TextStyle
   ghostDisabledRawText: TextStyle
   warningDisabledRawText: TextStyle
+  dangerDisabledRawText: TextStyle
   indicator: ViewStyle
 }
+const buttonSizes = ['xs', 'sm', 'md', 'lg'] as const
+
+type ButtonSize = (typeof buttonSizes)[number]
+
+const buttonSizeMap: Record<ButtonSize, number> = {
+  xs: 40,
+  sm: 48,
+  md: 52,
+  lg: 64,
+}
+
 export default (theme: Theme) =>
   StyleSheet.create<ButtonStyles>({
     container: {
       flexDirection: 'row',
+      alignItems: 'center',
     },
-    defaultHighlight: {
-      backgroundColor: theme.fill_tap,
-      borderColor: theme.border_color_base,
+    blockButtonRaw: {
+      width: '100%',
     },
+    xsIconOnly: {
+      minWidth: buttonSizeMap.xs,
+    },
+    smIconOnly: {
+      minWidth: buttonSizeMap.sm,
+    },
+    mdIconOnly: {
+      minWidth: buttonSizeMap.md,
+    },
+    lgIconOnly: {
+      minWidth: buttonSizeMap.lg,
+    },
+    centerContentAlign: {
+      alignItems: 'center',
+    },
+    leftContentAlign: {
+      alignItems: 'flex-start',
+    },
+    //highlight wrapper style follow type
     primaryHighlight: {
-      backgroundColor: theme.primary_button_fill_tap,
-      borderColor: theme.primary_button_fill,
+      backgroundColor: theme.colorPrimaryActive,
+    },
+    secondaryHighlight: {
+      backgroundColor: theme['gray-1'],
+    },
+    warningHighlight: {
+      backgroundColor: theme['yellow-4'],
+    },
+    dangerHighlight: {
+      backgroundColor: theme['red-4'],
     },
     ghostHighlight: {
       backgroundColor: 'transparent',
-      borderColor: theme.ghost_button_fill_tap,
     },
-    warningHighlight: {
-      backgroundColor: theme.warning_button_fill_tap,
-      borderColor: theme.warning_button_fill,
-    },
+    // wrapper style follow size
     wrapperStyle: {
-      alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: theme.radius_md,
-      borderWidth: 1,
+      paddingHorizontal: theme.paddingContentHorizontal,
     },
-    largeRaw: {
-      height: theme.button_height,
-      paddingLeft: theme.h_spacing_lg,
-      paddingRight: theme.h_spacing_lg,
+    xsRaw: {
+      height: buttonSizeMap.xs,
     },
-    smallRaw: {
-      height: theme.button_height_sm,
-      paddingLeft: theme.h_spacing_sm,
-      paddingRight: theme.h_spacing_sm,
+    smRaw: {
+      height: buttonSizeMap.sm,
     },
-    defaultRaw: {
-      backgroundColor: theme.fill_base,
-      borderColor: theme.border_color_base,
+    mdRaw: {
+      height: buttonSizeMap.md,
     },
-    primaryRaw: {
-      backgroundColor: theme.primary_button_fill,
-      borderColor: theme.primary_button_fill,
+    lgRaw: {
+      height: buttonSizeMap.lg,
+    },
+    //wrapper style follow shape
+    defaultShapeRaw: {
+      borderRadius: theme.borderRadiusLG,
+    },
+    squareShapeRaw: {
+      borderRadius: 0,
+    },
+    roundShapeRaw: {
+      borderRadius: buttonSizeMap.md,
+    },
+    circleShapeRaw: {
+      borderRadius: buttonSizeMap.md,
     },
     ghostRaw: {
       backgroundColor: 'transparent',
-      borderColor: theme.ghost_button_color,
+    },
+    //wrapper style follow type
+    primaryRaw: {
+      backgroundColor: theme.colorPrimary,
+    },
+    secondaryRaw: {
+      backgroundColor: theme['gray-1'],
     },
     warningRaw: {
-      backgroundColor: theme.warning_button_fill,
-      borderColor: theme.warning_button_fill,
+      backgroundColor: theme['yellow-6'],
     },
-    defaultDisabledRaw: {
-      backgroundColor: theme.fill_disabled,
-      borderColor: theme.fill_disabled,
+    dangerRaw: {
+      backgroundColor: theme['red-6'],
     },
+    //disabled wrapper style follow type
     primaryDisabledRaw: {
-      opacity: 0.4,
+      backgroundColor: theme.colorPrimaryActive,
     },
-    ghostDisabledRaw: {
-      borderColor: `${theme.color_text_base}1A`, // alpha 10%  https://codepen.io/chriscoyier/pen/XjbzAW
+    secondaryDisabledRaw: {
+      backgroundColor: theme['gray-1'],
     },
     warningDisabledRaw: {
-      opacity: 0.4,
+      backgroundColor: theme['yellow-4'],
     },
-    defaultHighlightText: {
-      color: theme.color_text_base,
+    dangerDisabledRaw: {
+      backgroundColor: theme['red-4'],
     },
-    primaryHighlightText: {
-      color: `${theme.color_text_base_inverse}4D`, // alpha 30%  https://codepen.io/chriscoyier/pen/XjbzAW
+    ghostDisabledRaw: {
+      backgroundColor: 'transparent',
     },
-    ghostHighlightText: {
-      color: theme.ghost_button_fill_tap,
+    buttonRawText: {
+      paddingLeft: theme.paddingXS,
     },
-    warningHighlightText: {
-      color: `${theme.color_text_base_inverse}4D`, // alpha 30%  https://codepen.io/chriscoyier/pen/XjbzAW
-    },
-    largeRawText: {
-      fontSize: theme.button_font_size,
-    },
-    smallRawText: {
-      fontSize: theme.button_font_size_sm,
-    },
-    defaultRawText: {
-      color: theme.color_text_base,
-    },
+    //text style follow type
     primaryRawText: {
-      color: theme.color_text_base_inverse,
+      color: theme.colorTextLight1,
     },
-    ghostRawText: {
-      color: theme.ghost_button_color,
+    secondaryRawText: {
+      color: theme.colorTextLight1,
     },
     warningRawText: {
-      color: theme.color_text_base_inverse,
+      color: theme.colorTextDark2,
     },
-    defaultDisabledRawText: {
-      color: `${theme.color_text_base}4D`, // alpha 30%  https://codepen.io/chriscoyier/pen/XjbzAW
+    dangerRawText: {
+      color: theme.colorTextLight1,
     },
+    ghostRawText: {
+      color: theme['gray-4'],
+    },
+    //text style follow size
+    xsRawText: {
+      fontSize: theme.fontSize,
+      lineHeight: buttonSizeMap.xs,
+      height: buttonSizeMap.xs,
+      fontWeight: '600',
+    },
+    smRawText: {
+      fontSize: theme.fontSizeLG,
+      lineHeight: buttonSizeMap.sm,
+      height: buttonSizeMap.sm,
+      fontWeight: '600',
+    },
+    mdRawText: {
+      fontSize: theme.fontSizeLG,
+      lineHeight: buttonSizeMap.md,
+      height: buttonSizeMap.md,
+      fontWeight: '600',
+    },
+    lgRawText: {
+      fontSize: theme.fontSizeLG,
+      lineHeight: buttonSizeMap.lg,
+      height: buttonSizeMap.lg,
+      fontWeight: '600',
+    },
+    //disabled text style follow type
     primaryDisabledRawText: {
-      color: `${theme.color_text_base_inverse}99`, // alpha 60%  https://codepen.io/chriscoyier/pen/XjbzAW
+      color: theme.colorTextLight5,
+    },
+    secondaryDisabledRawText: {
+      color: theme.colorTextLight5,
     },
     ghostDisabledRawText: {
-      color: `${theme.color_text_base}1A`, // alpha 10%  https://codepen.io/chriscoyier/pen/XjbzAW
+      color: theme['gray-4'],
     },
     warningDisabledRawText: {
-      color: `${theme.color_text_base_inverse}99`, // alpha 60%  https://codepen.io/chriscoyier/pen/XjbzAW
+      color: theme.colorTextDark5,
     },
+    dangerDisabledRawText: {
+      color: theme.colorTextLight5,
+    },
+    //indicator style
     indicator: {
-      marginRight: theme.h_spacing_md,
+      marginRight: theme.marginXS,
     },
   })

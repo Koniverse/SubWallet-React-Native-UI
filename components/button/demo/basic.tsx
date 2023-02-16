@@ -12,18 +12,14 @@ export default () => (
     <Button disabled>default disabled</Button>
     <WhiteSpace />
 
-    <Button type="primary">primary</Button>
+    <Button>primary</Button>
     <WhiteSpace />
-    <Button type="primary" disabled>
-      primary disabled
-    </Button>
+    <Button disabled>primary disabled</Button>
     <WhiteSpace />
 
-    <Button type="warning">warning</Button>
+    <Button>warning</Button>
     <WhiteSpace />
-    <Button type="warning" disabled>
-      warning disabled
-    </Button>
+    <Button disabled>warning disabled</Button>
     <WhiteSpace />
 
     <Button loading>loading button</Button>
@@ -46,13 +42,13 @@ export default () => (
       <Button type="ghost" disabled>
         ghost disabled
       </Button>
-      <Button type="ghost" size="small">
+      <Button type="ghost" size="sm">
         ghost
       </Button>
     </WingBlank>
     <WhiteSpace />
 
-    <Button type="primary">
+    <Button>
       <Icon name="login" />
     </Button>
   </WingBlank>
