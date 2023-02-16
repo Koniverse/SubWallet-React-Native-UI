@@ -1,5 +1,4 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import varibles from '../../style/themes/default'
 
 export interface ImagePickerStyle {
   container: ViewStyle
@@ -25,13 +24,13 @@ export default () =>
       height: 80,
     },
     item: {
-      marginRight: varibles.h_spacing_sm,
-      marginBottom: varibles.v_spacing_sm,
+      marginRight: 40,
+      marginBottom: 40,
       overflow: 'hidden',
     },
     image: {
       overflow: 'hidden',
-      borderRadius: varibles.radius_sm,
+      borderRadius: 5,
     },
     closeWrap: {
       width: 16,
@@ -46,7 +45,7 @@ export default () =>
       overflow: 'hidden',
     },
     closeText: {
-      color: varibles.color_text_base_inverse,
+      color: 'gray',
       backgroundColor: 'transparent',
       fontSize: 20,
       height: 20,
@@ -54,23 +53,23 @@ export default () =>
       fontWeight: '300',
     },
     plusWrap: {
-      borderRadius: varibles.radius_sm,
+      borderRadius: 4,
       borderWidth: 1,
       justifyContent: 'center',
       alignItems: 'center',
     },
     plusWrapNormal: {
-      backgroundColor: varibles.fill_base,
-      borderColor: varibles.border_color_base,
+      backgroundColor: 'gray',
+      borderColor: 'gray',
     },
     plusWrapHighlight: {
-      backgroundColor: varibles.fill_tap,
-      borderColor: varibles.border_color_base,
+      backgroundColor: 'gray',
+      borderColor: 'gray',
     },
     plusText: {
       fontSize: 64,
       backgroundColor: 'transparent',
       fontWeight: '100',
-      color: varibles.color_text_caption,
+      color: 'black',
     },
   })

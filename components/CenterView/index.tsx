@@ -1,6 +1,5 @@
 import { presetPalettes } from '@ant-design/colors'
-import { ConfigProvider } from '@subwallet/react-ui'
-import logoMap from '@subwallet/react-ui/es/theme/themes/logoMap'
+import { ConfigProvider, theme } from '@subwallet/react-ui'
 import seedToken from '@subwallet/react-ui/es/theme/themes/seed'
 import React, { useState } from 'react'
 import { View } from 'react-native'
@@ -74,10 +73,8 @@ interface CenterViewProps {
 
 const CenterView: React.FC<CenterViewProps> = ({ children }) => {
   const [newTheme, setNewTheme] = useState({
-    token: {
-      ...seedToken,
-    },
-    logoMap: logoMap,
+    algorithm: theme.darkAlgorithm,
+    token: seedToken,
   })
   const [currentTheme, setCurrentTheme] = useState('default')
 

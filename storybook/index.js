@@ -1,5 +1,3 @@
-// if you use expo remove this line
-
 import { withKnobs } from '@storybook/addon-knobs'
 import {
   addDecorator,

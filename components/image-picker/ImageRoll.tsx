@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native'
-import varibles from '../style/themes/default'
 import CameraRollPicker, { CameraRollPickerProps } from './CameraRollPicker'
 
 export interface ImageRollProps extends ImageRollTexts {
@@ -42,7 +41,7 @@ const styles = StyleSheet.create({
   },
   rightBtn: {
     width: 14 * 4,
-    color: varibles.brand_primary,
+    color: 'blue',
     fontSize: 16,
   },
 })

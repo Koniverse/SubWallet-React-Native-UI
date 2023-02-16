@@ -1,27 +1,30 @@
-import { ConfigProvider } from '@subwallet/react-ui'
-import React, { useContext } from 'react'
+import { theme as swTheme } from '@subwallet/react-ui'
+import { GlobalToken } from '@subwallet/react-ui/es/theme/interface'
+import logoMap from '@subwallet/react-ui/es/theme/themes/logoMap'
+import defaultTheme from '@subwallet/react-ui/es/theme/themes/seed'
+import React from 'react'
 import shallowequal from 'shallowequal'
-import defaultTheme from './themes/default'
 
 export const ThemeContext = React.createContext(defaultTheme)
-export type Theme = typeof defaultTheme & { [key: string]: any }
+export type Theme = GlobalToken & { [key: string]: any }
 export type PartialTheme = Partial<Theme>
+
 export interface ThemeProviderProps {
   value?: PartialTheme
   children?: React.ReactNode
 }
 export const ThemeProvider = (props: ThemeProviderProps) => {
   const { value, children } = props
-  const swThemeContext = useContext(ConfigProvider.ConfigContext)
-  const theme = React.useMemo(
-    () => ({
+  const { token } = swTheme.useToken()
+
+  const theme = React.useMemo(() => {
+    return {
       ...defaultTheme,
-      logoMap: swThemeContext.theme?.logoMap,
-      ...swThemeContext.theme?.token,
+      logoMap,
+      ...token,
       ...value,
-    }),
-    [value, swThemeContext],
-  )
+    }
+  }, [value, token])
   return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
 }
 export interface UseThemeContextProps {
@@ -33,12 +36,12 @@ export const useTheme = (props: UseThemeContextProps = {}) => {
 }
 
 export interface WithThemeProps<T, S> {
-  themeStyles?: (theme: Theme) => T
-  styles?: S & { [key: string]: any }
+  themeStyles?: (theme: PartialTheme) => T
+  styles?: PartialTheme
   children: (
     // fix: styles[`${size}RawText`]
-    styles: T & { [key: string]: any },
-    theme: Theme,
+    styles: PartialTheme,
+    theme: PartialTheme,
   ) => React.ReactNode
 }
 
@@ -50,11 +53,11 @@ export type WithThemeStyles<T> = { styles?: Partial<T> }
 export function WithTheme<T, S>(props: WithThemeProps<T, S>) {
   const { children, themeStyles, styles } = props
 
-  const stylesRef = React.useRef<S | undefined>(undefined)
+  const stylesRef = React.useRef<PartialTheme | undefined>(undefined)
   const cache = React.useRef<T | any>(undefined)
 
   const getStyles = React.useCallback(
-    (theme: Theme) => {
+    (theme: PartialTheme) => {
       if (themeStyles && cache.current === undefined) {
         cache.current = themeStyles(theme)
       }
