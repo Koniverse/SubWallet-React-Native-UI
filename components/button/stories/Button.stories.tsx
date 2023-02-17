@@ -55,7 +55,7 @@ storiesOf('Button', module)
       shape={select(
         'Shape',
         ['default', 'square', 'round', 'circle', 'squircle'],
-        'default',
+        'squircle',
       )}
       type={select(
         'Type',
