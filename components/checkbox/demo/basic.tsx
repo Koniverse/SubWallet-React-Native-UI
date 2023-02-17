@@ -55,18 +55,12 @@ export default class BasicCheckboxExample extends React.Component<any, any> {
           renderFooter={
             <Flex>
               <Flex.Item style={{ margin: 10 }}>
-                <Button
-                  type="primary"
-                  size="small"
-                  onPress={this.toggleChecked}>
+                <Button size="sm" onPress={this.toggleChecked}>
                   {!this.state.checked ? 'Check' : 'Uncheck'}
                 </Button>
               </Flex.Item>
               <Flex.Item style={{ margin: 10 }}>
-                <Button
-                  type="primary"
-                  size="small"
-                  onPress={this.toggleDisable}>
+                <Button size="sm" onPress={this.toggleDisable}>
                   {!this.state.disabled ? 'Disable' : 'Enable'}
                 </Button>
               </Flex.Item>

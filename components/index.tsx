@@ -1,4 +1,4 @@
-import './button/Button.stories'
+import './button/stories/Button.stories'
 import './icon/Icon.stories'
 import './typography/stories/text.stories'
 import './Welcome/Welcome.stories'

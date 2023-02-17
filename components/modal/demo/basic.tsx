@@ -168,9 +168,7 @@ export default class BasicModalExample extends React.Component<any, any> {
             <Text style={{ textAlign: 'center' }}>Content...</Text>
             <Text style={{ textAlign: 'center' }}>Content...</Text>
           </View>
-          <Button type="primary" onPress={this.onClose}>
-            close modal
-          </Button>
+          <Button onPress={this.onClose}>close modal</Button>
         </Modal>
         <Modal
           transparent={false}
@@ -181,14 +179,10 @@ export default class BasicModalExample extends React.Component<any, any> {
             <Text style={{ textAlign: 'center' }}>Content...</Text>
             <Text style={{ textAlign: 'center' }}>Content...</Text>
           </View>
-          <Button
-            type="primary"
-            onPress={() => Toast.info('Hello Toast in Modal now works')}>
+          <Button onPress={() => Toast.info('Hello Toast in Modal now works')}>
             Hello Toast in Modal now works
           </Button>
-          <Button type="primary" onPress={this.onClose1}>
-            close modal
-          </Button>
+          <Button onPress={this.onClose1}>close modal</Button>
         </Modal>
         <Modal
           popup
@@ -199,9 +193,7 @@ export default class BasicModalExample extends React.Component<any, any> {
             <Text style={{ textAlign: 'center' }}>Content...</Text>
             <Text style={{ textAlign: 'center' }}>Content...</Text>
           </View>
-          <Button type="primary" onPress={this.onClose2}>
-            close modal
-          </Button>
+          <Button onPress={this.onClose2}>close modal</Button>
         </Modal>
       </ScrollView>
     )

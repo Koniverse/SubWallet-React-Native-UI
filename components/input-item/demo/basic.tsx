@@ -104,8 +104,7 @@ export default class BasicInputItemExample extends React.Component<any, any> {
             <Button
               onPress={() => {
                 this.inputRef.focus()
-              }}
-              type="primary">
+              }}>
               点击获取光标
             </Button>
           </List.Item>

@@ -38,7 +38,7 @@ export default class BasicProgressExample extends React.Component<any, any> {
         <Button
           style={{ width: 50, marginLeft: 10 }}
           type="ghost"
-          size="small"
+          size="sm"
           onPress={this.onAdd}>
           (+-)10
         </Button>

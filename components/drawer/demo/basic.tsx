@@ -35,10 +35,7 @@ export default class DrawerExample extends React.Component<any, any> {
                   alignItems: 'center',
                 }}>
                 <Text>Categories - {index}</Text>
-                <Button
-                  type="primary"
-                  size="small"
-                  onPress={() => this.drawer.closeDrawer()}>
+                <Button size="sm" onPress={() => this.drawer.closeDrawer()}>
                   close drawer
                 </Button>
               </View>
