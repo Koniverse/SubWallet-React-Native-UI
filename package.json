@@ -41,6 +41,9 @@
     "rc-util": "^4.21.1",
     "react-native-codegen": "^0.0.7",
     "react-native-collapsible": "^1.6.0",
+    "react-native-super-ellipse-mask": "^1.0.7",
+    "react-native-svg": "^9",
+    "react-native-svg-transformer": "^1.0.0",
     "shallowequal": "^1.1.0",
     "utility-types": "^3.10.0"
   },
