@@ -14,6 +14,7 @@ import { TouchableHighlight } from 'react-native-gesture-handler'
 import { WithTheme, WithThemeStyles } from '../style'
 import { ButtonPropsType } from './PropsType'
 import buttonStyles, { ButtonStyles } from './style/index'
+import Squircle from '../squircle'
 
 export interface ButtonProps
   extends ButtonPropsType,
@@ -115,7 +116,8 @@ const Button: React.FC<ButtonProps> = (props) => {
         ) : icon ? (
           icon
         ) : null
-        return (
+
+        const buttonNode = (
           <TouchableHighlight
             accessibilityRole="button"
             accessibilityState={{ disabled: !!disabled }}
@@ -139,6 +141,16 @@ const Button: React.FC<ButtonProps> = (props) => {
             </View>
           </TouchableHighlight>
         )
+
+        if (shape === 'squircle' && isIconOnly) {
+          return (
+            <Squircle size={size} backgroundColor={'red'}>
+              {buttonNode}
+            </Squircle>
+          )
+        }
+
+        return buttonNode
       }}
     </WithTheme>
   )

@@ -6,20 +6,28 @@ import SuperEllipseMask from 'react-native-super-ellipse-mask'
 interface Props {
   backgroundColor?: string
   children?: React.ReactNode
-  size?: number
+  size?: 'xs' | 'sm' | 'md' | 'lg'
+}
+
+const SIZE_MAP: Record<string, number> = {
+  xs: 40,
+  sm: 48,
+  md: 52,
+  lg: 64,
 }
 
 const Squircle: React.FC<Props> = ({
   children,
-  size = 64,
+  size = 'md',
   backgroundColor = '#004BFF',
 }) => {
+  const squircleSize = size ? SIZE_MAP[size] : 52
   return (
-    <SuperEllipseMask radius={size / 2.5}>
+    <SuperEllipseMask radius={squircleSize / 2.5}>
       <View
         style={{
-          width: size,
-          height: size,
+          width: squircleSize,
+          height: squircleSize,
           backgroundColor: backgroundColor,
         }}>
         {children}
