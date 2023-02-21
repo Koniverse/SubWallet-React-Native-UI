@@ -71,15 +71,19 @@ export default (theme: Theme) =>
       width: '100%',
     },
     xsIconOnly: {
+      paddingHorizontal: 0,
       minWidth: buttonSizeMap.xs,
     },
     smIconOnly: {
+      paddingHorizontal: 0,
       minWidth: buttonSizeMap.sm,
     },
     mdIconOnly: {
+      paddingHorizontal: 0,
       minWidth: buttonSizeMap.md,
     },
     lgIconOnly: {
+      paddingHorizontal: 0,
       minWidth: buttonSizeMap.lg,
     },
     centerContentAlign: {
