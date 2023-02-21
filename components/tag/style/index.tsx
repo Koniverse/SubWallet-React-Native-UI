@@ -4,75 +4,159 @@ import { Theme } from '../../style'
 export interface TagStyle {
   tag: ViewStyle
   wrap: ViewStyle
-  wrapSmall: ViewStyle
+  shapeDefaultStyle: ViewStyle
+  shapeSquareStyle: ViewStyle
+  shapeRoundStyle: ViewStyle
+  //primary
+  primaryDefaultWrap: ViewStyle
+  primaryGrayWrap: ViewStyle
+  primaryFilledWrap: ViewStyle
+  primaryDefaultText: TextStyle
+  primaryGrayText: TextStyle
+  primaryFilledText: TextStyle
+  //secondary
+  secondaryDefaultWrap: ViewStyle
+  secondaryGrayWrap: ViewStyle
+  secondaryFilledWrap: ViewStyle
+  secondaryDefaultText: TextStyle
+  secondaryGrayText: TextStyle
+  secondaryFilledText: TextStyle
+  //success
+  successDefaultWrap: ViewStyle
+  successGrayWrap: ViewStyle
+  successFilledWrap: ViewStyle
+  successDefaultText: TextStyle
+  successGrayText: TextStyle
+  successFilledText: TextStyle
+  //processing
+  processingDefaultWrap: ViewStyle
+  processingGrayWrap: ViewStyle
+  processingFilledWrap: ViewStyle
+  processingDefaultText: TextStyle
+  processingGrayText: TextStyle
+  processingFilledText: TextStyle
+  //error
+  errorDefaultWrap: ViewStyle
+  errorGrayWrap: ViewStyle
+  errorFilledWrap: ViewStyle
+  errorDefaultText: TextStyle
+  errorGrayText: TextStyle
+  errorFilledText: TextStyle
+  //warning
+  warningDefaultWrap: ViewStyle
+  warningGrayWrap: ViewStyle
+  warningFilledWrap: ViewStyle
+  warningDefaultText: TextStyle
+  warningGrayText: TextStyle
+  warningFilledText: TextStyle
   text: TextStyle
-  textSmall: TextStyle
-  normalWrap: ViewStyle
-  normalText: TextStyle
-  activeWrap: ViewStyle
-  activeText: TextStyle
-  disabledWrap: ViewStyle
-  disabledText: TextStyle
   close: ViewStyle
 }
 
-export default (theme: Theme) =>
-  StyleSheet.create<TagStyle>({
+type StatusVariableType =
+  | 'Success'
+  | 'Info'
+  | 'Error'
+  | 'Warning'
+  | 'Primary'
+  | 'Secondary'
+
+export default (theme: Theme) => {
+  const getTagStatusWrapStyle = (
+    bgType: 'default' | 'gray' | 'filled',
+    colorVariable: StatusVariableType,
+  ) => {
+    const tagBackgroundColor =
+      bgType === 'default'
+        ? theme[`color${colorVariable}Bg`]
+        : bgType === 'filled'
+        ? theme[`color${colorVariable}`]
+        : theme['gray-1']
+    return {
+      backgroundColor: tagBackgroundColor,
+    }
+  }
+  const getTagStatusTextStyle = (
+    bgType: 'default' | 'gray' | 'filled',
+    colorVariable: StatusVariableType,
+  ) => {
+    const tagColorText =
+      bgType === 'default' || bgType === 'gray'
+        ? theme[`color${colorVariable}`]
+        : theme.colorText
+    return {
+      color: tagColorText,
+    }
+  }
+
+  const tagHeight = Math.round(theme.fontSizeXS * theme.lineHeightXS)
+
+  return StyleSheet.create<TagStyle>({
     tag: {
       position: 'relative',
-      flexDirection: 'row',
       overflow: 'visible',
     },
     wrap: {
-      height: theme.tag_height,
-      // lineHeight: theme.tag_height, // doest work in RN
+      flexDirection: 'row',
+      alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: theme.radius_sm,
-      borderWidth: theme.border_width_sm,
-      borderStyle: 'solid',
-      paddingVertical: 0,
-      paddingHorizontal: theme.h_spacing_lg,
+      paddingVertical: theme.paddingXXS / 2,
+      paddingHorizontal: theme.paddingXS,
     },
-    wrapSmall: {
-      height: theme.tag_height_sm,
-      paddingVertical: 0,
-      paddingHorizontal: theme.h_spacing_sm,
+    shapeDefaultStyle: {
+      borderRadius: theme.borderRadiusLG,
     },
+    shapeSquareStyle: {
+      borderRadius: 0,
+    },
+    shapeRoundStyle: {
+      borderRadius: tagHeight,
+    },
+    //bgType with status
+    primaryDefaultWrap: getTagStatusWrapStyle('default', 'Primary'),
+    primaryGrayWrap: getTagStatusWrapStyle('gray', 'Primary'),
+    primaryFilledWrap: getTagStatusWrapStyle('filled', 'Primary'),
+    secondaryDefaultWrap: getTagStatusWrapStyle('default', 'Secondary'),
+    secondaryGrayWrap: getTagStatusWrapStyle('gray', 'Secondary'),
+    secondaryFilledWrap: getTagStatusWrapStyle('filled', 'Secondary'),
+    successDefaultWrap: getTagStatusWrapStyle('default', 'Success'),
+    successGrayWrap: getTagStatusWrapStyle('gray', 'Success'),
+    successFilledWrap: getTagStatusWrapStyle('filled', 'Success'),
+    processingDefaultWrap: getTagStatusWrapStyle('default', 'Info'),
+    processingGrayWrap: getTagStatusWrapStyle('gray', 'Info'),
+    processingFilledWrap: getTagStatusWrapStyle('filled', 'Info'),
+    errorDefaultWrap: getTagStatusWrapStyle('default', 'Error'),
+    errorGrayWrap: getTagStatusWrapStyle('gray', 'Error'),
+    errorFilledWrap: getTagStatusWrapStyle('filled', 'Error'),
+    warningDefaultWrap: getTagStatusWrapStyle('default', 'Warning'),
+    warningGrayWrap: getTagStatusWrapStyle('gray', 'Warning'),
+    warningFilledWrap: getTagStatusWrapStyle('filled', 'Warning'),
     text: {
-      fontSize: theme.button_font_size_sm,
+      fontSize: theme.fontSizeXS,
       textAlign: 'center',
+      lineHeight: tagHeight,
+      fontWeight: '700',
     },
-    textSmall: {
-      fontSize: theme.font_size_icontext,
-    },
-    normalWrap: {
-      backgroundColor: theme.fill_base,
-      borderColor: theme.border_color_base,
-    },
-    normalText: {
-      color: theme.color_text_caption,
-    },
-    activeWrap: {
-      backgroundColor: theme.fill_base,
-      borderColor: theme.brand_primary,
-    },
-    activeText: {
-      color: theme.color_link,
-    },
-    disabledWrap: {
-      backgroundColor: theme.fill_disabled,
-      borderColor: theme.fill_disabled,
-    },
-    disabledText: {
-      color: theme.color_text_disabled,
-    },
+    primaryDefaultText: getTagStatusTextStyle('default', 'Primary'),
+    primaryGrayText: getTagStatusTextStyle('gray', 'Primary'),
+    primaryFilledText: getTagStatusTextStyle('filled', 'Primary'),
+    secondaryDefaultText: getTagStatusTextStyle('default', 'Secondary'),
+    secondaryGrayText: getTagStatusTextStyle('gray', 'Secondary'),
+    secondaryFilledText: getTagStatusTextStyle('filled', 'Secondary'),
+    successDefaultText: getTagStatusTextStyle('default', 'Success'),
+    successGrayText: getTagStatusTextStyle('gray', 'Success'),
+    successFilledText: getTagStatusTextStyle('filled', 'Success'),
+    processingDefaultText: getTagStatusTextStyle('default', 'Info'),
+    processingGrayText: getTagStatusTextStyle('gray', 'Info'),
+    processingFilledText: getTagStatusTextStyle('filled', 'Info'),
+    errorDefaultText: getTagStatusTextStyle('default', 'Error'),
+    errorGrayText: getTagStatusTextStyle('gray', 'Error'),
+    errorFilledText: getTagStatusTextStyle('filled', 'Error'),
+    warningDefaultText: getTagStatusTextStyle('default', 'Warning'),
+    warningGrayText: getTagStatusTextStyle('gray', 'Warning'),
+    warningFilledText: getTagStatusTextStyle('filled', 'Warning'),
     close: {
-      position: 'absolute',
-      top: -6,
-      left: -6,
-      color: theme.color_text_placeholder,
-      backgroundColor: 'transparent',
-      borderRadius: 999,
-      fontSize: 16,
+      marginLeft: 4,
     },
   })
+}
