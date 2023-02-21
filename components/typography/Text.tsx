@@ -1,14 +1,14 @@
 import React from 'react'
-import { StyleProp, Text as RNText, TextStyle } from 'react-native'
+import { Text as RNText, TextStyle } from 'react-native'
 import { WithTheme, WithThemeStyles } from '../style'
 import { TextSizeProps } from './PropsType'
 import TypographyStyles, { TypographyStyle } from './style'
 
 export interface TextProps extends WithThemeStyles<TypographyStyle> {
-  ellipsis: boolean
+  ellipsis?: boolean
   monospace?: boolean
   size?: TextSizeProps
-  style?: StyleProp<TextStyle>
+  style?: TextStyle
   children?: React.ReactNode
 }
 
