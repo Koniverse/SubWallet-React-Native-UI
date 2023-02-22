@@ -49,6 +49,7 @@
     "react-native-codegen": "^0.0.7",
     "react-native-collapsible": "^1.6.0",
     "react-native-loading-spinner-overlay": "^3.0.1",
+    "react-native-qrcode-svg": "^6.2.0",
     "react-native-super-ellipse-mask": "^1.0.7",
     "react-native-svg": "^13.8.0",
     "react-native-svg-transformer": "^1.0.0",
