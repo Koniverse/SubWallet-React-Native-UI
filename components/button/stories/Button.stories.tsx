@@ -5,6 +5,7 @@ import React from 'react'
 import CenterView from '../../CenterView'
 import Button from '../index'
 import Icon from '../../icon'
+import { Aperture } from 'phosphor-react-native'
 
 storiesOf('Button', module)
   .addDecorator((getStory) => <CenterView>{getStory()}</CenterView>)
@@ -46,7 +47,7 @@ storiesOf('Button', module)
       block={boolean('Block', false)}
       loading={boolean('Loading', false)}
       contentAlign={select('Content align', ['center', 'left'], 'center')}
-      icon={<Icon name={'camera'} size={'md'} />}
+      icon={<Icon phosphorIcon={Aperture} size="md" />}
       onPress={action('clicked-text')}
     />
   ))
@@ -67,7 +68,7 @@ storiesOf('Button', module)
       block={boolean('Block', false)}
       loading={boolean('Loading', false)}
       contentAlign={select('Content align', ['center', 'left'], 'center')}
-      icon={<Icon name={'camera'} size={'md'} />}
+      icon={<Icon phosphorIcon={Aperture} size="md" />}
       onPress={action('clicked-text')}
     />
   ))
@@ -88,7 +89,7 @@ storiesOf('Button', module)
       block={boolean('Block', false)}
       loading={boolean('Loading', false)}
       contentAlign={select('Content align', ['center', 'left'], 'center')}
-      icon={<Icon name={'camera'} size={'md'} />}
+      icon={<Icon phosphorIcon={Aperture} size="md" />}
       onPress={action('clicked-text')}>
       Button
     </Button>
@@ -110,7 +111,7 @@ storiesOf('Button', module)
       block={boolean('Block', false)}
       loading={boolean('Loading', false)}
       contentAlign={select('Content align', ['center', 'left'], 'center')}
-      icon={<Icon name={'camera'} size={'md'} />}
+      icon={<Icon phosphorIcon={Aperture} size="md" />}
       onPress={action('clicked-text')}
     />
   ))
@@ -131,7 +132,7 @@ storiesOf('Button', module)
       block={boolean('Block', false)}
       loading={boolean('Loading', false)}
       contentAlign={select('Content align', ['center', 'left'], 'center')}
-      icon={<Icon name={'camera'} size={'md'} />}
+      icon={<Icon phosphorIcon={Aperture} size="md" />}
       onPress={action('clicked-text')}>
       Button
     </Button>
