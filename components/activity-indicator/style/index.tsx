@@ -13,13 +13,8 @@ export interface ActivityIndicatorStyle {
 export default (theme: Theme) =>
   StyleSheet.create<ActivityIndicatorStyle>({
     container: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
-      backgroundColor: 'transparent',
-      zIndex: theme.toast_zindex,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     innerContainer: {
       flex: 1,

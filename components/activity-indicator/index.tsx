@@ -1,43 +1,66 @@
-import React, { useEffect, useMemo } from 'react'
-import { Animated, Easing } from 'react-native'
-import { WithThemeStyles } from '../style'
-import { ActivityIndicatorStyle } from './style/index'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react'
+import { View } from 'react-native'
+import Animated, {
+  cancelAnimation,
+  Easing,
+  useAnimatedStyle,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from 'react-native-reanimated'
+import { WithTheme, WithThemeStyles } from '../style'
 // @ts-ignore
-import SVGImg from './loading-outlined.svg'
+import SVGImage from './loading-outlined.svg'
+import ActivityIndicatorStyles, { ActivityIndicatorStyle } from './style'
 
-export interface ActivityIndicatorNativeProps
+interface ActivityIndicatorProps
   extends WithThemeStyles<ActivityIndicatorStyle> {
-  size?: number
-  indicatorColor?: string
+  size: number
+  indicatorColor: string
 }
 
-const RNActivityIndicator: React.FC<ActivityIndicatorNativeProps> = ({
+const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({
   size = 16,
-  indicatorColor = '#FFF',
+  indicatorColor = '#fff',
+  styles,
 }) => {
-  const animation = useMemo(() => new Animated.Value(0), [])
-
-  const rotation = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  })
+  const rotation = useSharedValue(0)
+  const animatedStyles = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {
+          rotateZ: `${rotation.value}deg`,
+        },
+      ],
+    }
+  }, [rotation.value])
 
   useEffect(() => {
-    Animated.loop(
-      Animated.timing(animation, {
-        toValue: 1,
+    rotation.value = withRepeat(
+      withTiming(360, {
         duration: 1000,
         easing: Easing.linear,
-        useNativeDriver: true,
       }),
-    ).start()
-  }, [animation])
+      200,
+    )
+    return () => cancelAnimation(rotation)
+  }, [])
 
+  const renderIndicator = (_style: ActivityIndicatorStyle) => {
+    return (
+      <View style={_style.container}>
+        <Animated.View style={[animatedStyles]}>
+          <SVGImage width={size} height={size} color={indicatorColor} />
+        </Animated.View>
+      </View>
+    )
+  }
   return (
-    <Animated.View style={{ transform: [{ rotate: rotation }] }}>
-      <SVGImg width={size} height={size} color={indicatorColor} />
-    </Animated.View>
+    <WithTheme styles={styles} themeStyles={ActivityIndicatorStyles}>
+      {renderIndicator}
+    </WithTheme>
   )
 }
 
-export default RNActivityIndicator
+export default ActivityIndicator
