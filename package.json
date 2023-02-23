@@ -48,6 +48,7 @@
     "rc-util": "^4.21.1",
     "react-native-codegen": "^0.0.7",
     "react-native-collapsible": "^1.6.0",
+    "react-native-fast-image": "^8.6.3",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-qrcode-svg": "^6.2.0",
     "react-native-super-ellipse-mask": "^1.0.7",
