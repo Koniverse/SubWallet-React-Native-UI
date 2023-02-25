@@ -40,25 +40,30 @@ const Image: React.FC<SWImageProps> = ({
     const customImageStyle = [
       _style[`${shape}Image`],
       { width: squircleSize || 'undefined' },
+      _style.backgroundColor,
       style,
     ]
     if (shape === 'squircle') {
       return (
-        <SuperEllipseMask
-          radius={typeof squircleSize === 'number' ? squircleSize / 2.5 : 100}>
-          <FastImage
-            source={src}
-            style={customImageStyle}
-            onLoadStart={onLoadStart}
-            onLoadEnd={onLoadEnd}
-            {...restProps}
-          />
-          {isLoading && (
-            <View style={_style.loadingImage}>
-              <ActivityIndicator size={30} indicatorColor="#737373" />
-            </View>
-          )}
-        </SuperEllipseMask>
+        <View style={customStyle}>
+          <SuperEllipseMask
+            radius={
+              typeof squircleSize === 'number' ? squircleSize / 2.5 : 100
+            }>
+            <FastImage
+              source={src}
+              style={customImageStyle}
+              onLoadStart={onLoadStart}
+              onLoadEnd={onLoadEnd}
+              {...restProps}
+            />
+            {isLoading && (
+              <View style={_style.loadingImage}>
+                <ActivityIndicator size={30} indicatorColor="#737373" />
+              </View>
+            )}
+          </SuperEllipseMask>
+        </View>
       )
     }
     return (
@@ -71,7 +76,7 @@ const Image: React.FC<SWImageProps> = ({
           {...restProps}
         />
         {isLoading && (
-          <View style={_style.loadingImage}>
+          <View style={[_style.loadingImage, _style[`${shape}Image`]]}>
             <ActivityIndicator size={30} indicatorColor="#737373" />
           </View>
         )}
