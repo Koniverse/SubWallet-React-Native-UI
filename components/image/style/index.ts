@@ -8,6 +8,7 @@ export interface ImageStyle {
   squareImage: FastImageStyle
   circleImage: FastImageStyle
   squircleImage: FastImageStyle
+  backgroundColor: FastImageStyle
   loadingImage: ViewStyle
 }
 
@@ -30,7 +31,7 @@ export default (theme: Theme) =>
       borderBottomLeftRadius: 999,
     },
     squircleImage: {
-      borderRadius: 1,
+      borderRadius: 0,
     },
     loadingImage: {
       position: 'absolute',
@@ -38,9 +39,10 @@ export default (theme: Theme) =>
       bottom: 0,
       right: 0,
       left: 0,
-      backgroundColor: theme.colorBgInput,
       justifyContent: 'center',
       alignItems: 'center',
-      borderRadius: theme.borderRadiusLG,
+    },
+    backgroundColor: {
+      backgroundColor: theme.colorBgInput,
     },
   })
