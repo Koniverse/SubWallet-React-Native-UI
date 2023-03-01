@@ -49,6 +49,7 @@
     "rc-util": "^4.21.1",
     "react-native-codegen": "^0.0.7",
     "react-native-collapsible": "^1.6.0",
+    "react-native-customizable-toast": "^0.1.7",
     "react-native-fast-image": "^8.6.3",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-qrcode-svg": "^6.2.0",
@@ -56,13 +57,7 @@
     "react-native-svg": "^12.5.1",
     "react-native-svg-transformer": "^1.0.0",
     "shallowequal": "^1.1.0",
-    "utility-types": "^3.10.0",
-    "@polkadot/api": "^9.9.4",
-    "@polkadot/react-qr": "^2.9.13",
-    "@polkadot/ui-keyring": "^2.9.13",
-    "@polkadot/ui-settings": "^2.9.13",
-    "@polkadot/util-crypto": "^10.1.14",
-    "@polkadot/wasm-crypto": "^6.4.1"
+    "utility-types": "^3.10.0"
   },
   "devDependencies": {
     "@ant-design/colors": "^6.0.0",

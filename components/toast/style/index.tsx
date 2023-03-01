@@ -1,57 +1,54 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { Theme } from '../../style'
 
 export interface ToastStyle {
+  successBorderColor: ViewStyle
+  infoBorderColor: ViewStyle
+  warningBorderColor: ViewStyle
+  errorBorderColor: ViewStyle
   container: ViewStyle
-  innerContainer: ViewStyle
-  innerWrap: ViewStyle
-  iconToast: ViewStyle
-  textToast: ViewStyle
-  content: TextStyle
-  image: TextStyle
-  centering: ViewStyle
+  touchable: ViewStyle
+  text: ViewStyle
+  horizontalToast: ViewStyle
+  verticalToast: ViewStyle
 }
 
 export default (theme: Theme) =>
   StyleSheet.create<ToastStyle>({
     container: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      bottom: 0,
-      right: 0,
-      backgroundColor: 'transparent',
-      justifyContent: 'center',
+      paddingHorizontal: theme.paddingContentHorizontal,
+      paddingVertical: theme.paddingContentVerticalSM,
       alignItems: 'center',
-      zIndex: theme.toast_zindex,
     },
-    innerContainer: {
-      backgroundColor: 'transparent',
-    },
-    innerWrap: {
+    touchable: {
       alignItems: 'center',
-      backgroundColor: theme.toast_fill,
-      minWidth: 100,
+      borderRadius: theme.borderRadiusLG,
+      padding: theme.padding,
+      minHeight: 40,
+      borderWidth: 2,
     },
-    iconToast: {
-      borderRadius: theme.radius_lg,
-      padding: theme.v_spacing_lg,
+    text: {
+      color: theme.colorTextHeading,
+      fontSize: theme.fontSize,
+      paddingHorizontal: 2,
     },
-    textToast: {
-      borderRadius: theme.radius_sm,
-      paddingVertical: theme.v_spacing_md,
-      paddingHorizontal: theme.v_spacing_lg,
+    successBorderColor: {
+      borderColor: theme.colorSuccess,
     },
-    content: {
-      color: theme.color_text_base_inverse,
-      fontSize: theme.font_size_subhead,
+    infoBorderColor: {
+      borderColor: theme.colorInfo,
     },
-    image: {
-      marginBottom: theme.v_spacing_xs,
+    warningBorderColor: {
+      borderColor: theme.colorWarning,
     },
-    centering: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: theme.v_spacing_md,
+    errorBorderColor: {
+      borderColor: theme.colorError,
+    },
+    horizontalToast: {
+      flexDirection: 'row',
+    },
+    verticalToast: {
+      width: 200,
+      flexDirection: 'column',
     },
   })
