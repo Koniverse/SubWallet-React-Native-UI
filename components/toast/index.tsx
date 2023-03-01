@@ -1,166 +1,160 @@
-import React from 'react'
-import Portal from '../portal'
-import ToastContainer from './ToastContainer'
+import { NotificationPlacement } from '@subwallet/react-ui/es/notification/interface'
+import {
+  CheckCircle,
+  Info,
+  WarningCircle,
+  XCircle,
+} from 'phosphor-react-native'
+import React, { createRef } from 'react'
+import { Text, View } from 'react-native'
+import {
+  Swipeable,
+  ToasterBase,
+  ToasterMethods,
+  useToast,
+} from 'react-native-customizable-toast'
+import { TouchableOpacity } from 'react-native-gesture-handler'
+import {
+  SlideInDown,
+  SlideInLeft,
+  SlideInRight,
+  SlideInUp,
+  SlideOutDown,
+  SlideOutLeft,
+  SlideOutRight,
+  SlideOutUp,
+} from 'react-native-reanimated'
+import { Icon } from '..'
+import { PartialTheme, WithTheme, WithThemeStyles } from '../style'
+import ToastStyles, { ToastStyle } from './style'
 
-interface IToastConfigurable {
+export type NotificationType = 'success' | 'info' | 'warning' | 'error'
+
+export interface CustomToastComponentProps extends WithThemeStyles<ToastStyle> {
+  message: string
   duration?: number
-  onClose?: () => void
-  mask?: boolean
-  stackable?: boolean
+  type?: NotificationType
+  onPress?(): void
+  dismissible?: boolean
+  backgroundColor?: string
+  autoHide?: boolean
+  direction?: 'vertical' | 'horizontal'
 }
 
-interface IToastProps extends IToastConfigurable {
-  content: string | React.ReactNode
+const CustomToasterRef = createRef<ToasterMethods<CustomToastComponentProps>>()
+const typeToIcon = {
+  success: CheckCircle,
+  info: Info,
+  error: XCircle,
+  warning: WarningCircle,
 }
 
-const SHORT = 3
+const CustomToastComponent: React.FC<CustomToastComponentProps> = ({
+  styles,
+}) => {
+  const {
+    message,
+    hide,
+    dismissible,
+    backgroundColor = 'rgba(0, 0, 0, 0.75)',
+    type = 'info',
+    direction = 'horizontal',
+    onPress,
+  } = useToast<CustomToastComponentProps>()
 
-const defaultConfig: IToastConfigurable = {
-  duration: SHORT,
-  onClose: () => {},
-  mask: true,
-  stackable: true,
-}
+  const renderToast = (_styles: ToastStyle, theme: PartialTheme) => {
+    const getTouchableStyle = [
+      _styles.touchable,
+      _styles[`${type}BorderColor`],
+      _styles[`${direction}Toast`],
+      {
+        backgroundColor,
+      },
+    ]
+    const iconStatusColor = {
+      success: theme.colorSuccess,
+      info: theme.colorInfo,
+      error: theme.colorError,
+      warning: theme.colorWarning,
+    }
+    const onPressToast = () => {
+      onPress && onPress()
+      hide && hide()
+    }
 
-let defaultProps = {
-  ...defaultConfig,
-}
+    return (
+      <Swipeable onSwipe={hide} disabled={!dismissible}>
+        <View style={_styles.container}>
+          <TouchableOpacity
+            useNativeAnimations
+            disabled={!dismissible}
+            style={getTouchableStyle}
+            onPress={onPressToast}>
+            {React.isValidElement(message) ? (
+              message
+            ) : (
+              <>
+                <Icon
+                  type="phosphor"
+                  phosphorIcon={typeToIcon[type]}
+                  iconColor={iconStatusColor[type]}
+                  weight="fill"
+                  size="sm"
+                />
+                <Text style={_styles.text}>{message}</Text>
+              </>
+            )}
+          </TouchableOpacity>
+        </View>
+      </Swipeable>
+    )
+  }
 
-const toastKeyMap: { [key: number]: 1 } = {}
-
-function remove(key: number) {
-  Portal.remove(key)
-  delete toastKeyMap[key]
-}
-
-function removeAll() {
-  Object.keys(toastKeyMap).forEach((_key) =>
-    Portal.remove(Number.parseInt(_key, 10)),
+  return (
+    <WithTheme styles={styles} themeStyles={ToastStyles}>
+      {renderToast}
+    </WithTheme>
   )
 }
 
-function notice(
-  content: string | IToastProps,
-  type: string,
-  duration = defaultProps.duration,
-  onClose = defaultProps.onClose,
-  mask = defaultProps.mask,
-) {
-  let props = {
-    ...defaultProps,
-    content: content as string | React.ReactNode,
-    type,
-    duration,
-    onClose,
-    mask,
-  }
-
-  if (typeof content !== 'string') {
-    props = {
-      ...props,
-      ...content,
+export const CustomToasterHelper = {
+  show: (options: CustomToastComponentProps) => {
+    const { autoHide = true, duration = 3000 } = options
+    const id = CustomToasterRef.current?.show(options)!
+    if (duration && duration > 0 && autoHide) {
+      setTimeout(() => {
+        CustomToasterRef.current?.hide(id)
+      }, duration)
     }
-  }
-
-  if (!props.stackable) {
-    removeAll()
-  }
-
-  const key = Portal.add(
-    <ToastContainer
-      content={props.content}
-      duration={props.duration}
-      onClose={props.onClose}
-      type={props.type}
-      mask={props.mask}
-      onAnimationEnd={() => {
-        remove(key)
-      }}
-    />,
-  )
-  toastKeyMap[key] = 1
-  return key
+  },
+  hide: (id: string) => CustomToasterRef.current?.hide(id),
+  filter: (fn: (value: CustomToastComponentProps, index: number) => void) =>
+    CustomToasterRef.current?.filter(fn),
+  update: (id: string, options: Partial<CustomToastComponentProps>) =>
+    CustomToasterRef.current?.update(id, options),
 }
 
-export default {
-  SHORT,
-  LONG: 8,
-  defaultConfig,
-  getConfig: () => {
-    return { ...defaultProps }
-  },
-  config(props: IToastConfigurable) {
-    defaultProps = {
-      ...defaultProps,
-      ...props,
-    }
-  },
-  /**
-   * @deprecated use Toast.info instead
-   */
-  show(props: string | IToastProps, duration?: number, mask?: boolean) {
-    return notice(props, 'info', duration, () => {}, mask)
-  },
-  /**
-   *
-   * @param props: toast props
-   */
-  info(
-    props: string | IToastProps,
-    duration?: number,
-    onClose?: () => void,
-    mask?: boolean,
-  ) {
-    return notice(props, 'info', duration, onClose, mask)
-  },
-  /**
-   *
-   * @param props: toast props
-   */
-  success(
-    props: string | IToastProps,
-    duration?: number,
-    onClose?: () => void,
-    mask?: boolean,
-  ) {
-    return notice(props, 'success', duration, onClose, mask)
-  },
-  /**
-   *
-   * @param props: toast props
-   */
-  fail(
-    props: string | IToastProps,
-    duration?: number,
-    onClose?: () => void,
-    mask?: boolean,
-  ) {
-    return notice(props, 'fail', duration, onClose, mask)
-  },
-  /**
-   *
-   * @param props: toast props
-   */
-  offline(
-    props: string | IToastProps,
-    duration?: number,
-    onClose?: () => void,
-    mask?: boolean,
-  ) {
-    return notice(props, 'offline', duration, onClose, mask)
-  },
-  /**
-   *
-   * @param props: toast props
-   */
-  loading(
-    props: string | IToastProps,
-    duration?: number,
-    onClose?: () => void,
-    mask?: boolean,
-  ) {
-    return notice(props, 'loading', duration, onClose, mask)
-  },
-  remove,
-  removeAll,
+const getPlacement = {
+  top: [SlideInUp, SlideOutUp],
+  topLeft: [SlideInLeft, SlideOutLeft],
+  topRight: [SlideInRight, SlideOutRight],
+  bottom: [SlideInDown, SlideOutDown],
+  bottomLeft: [SlideInLeft, SlideOutLeft],
+  bottomRight: [SlideInRight, SlideOutRight],
+}
+export interface CustomToasterProps {
+  placement: NotificationPlacement
+}
+export const CustomToaster: React.FC<CustomToasterProps> = ({
+  placement = 'top',
+}) => {
+  return (
+    <ToasterBase
+      entering={getPlacement[placement][0]}
+      exiting={getPlacement[placement][1]}
+      ref={CustomToasterRef}
+      onSwipeEdge={({ filter }) => filter((e) => !e.dismissible)}
+      render={CustomToastComponent}
+    />
+  )
 }
