@@ -31,7 +31,7 @@ import ToastStyles, { ToastStyle } from './style'
 export type NotificationType = 'success' | 'info' | 'warning' | 'error'
 
 export interface CustomToastComponentProps extends WithThemeStyles<ToastStyle> {
-  message: string
+  message: React.ReactNode
   duration?: number
   type?: NotificationType
   onPress?(): void

@@ -37,6 +37,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/react-native-fontawesome": "^0.3.0",
+    "@gorhom/portal": "^1.0.14",
     "@polkadot/reactnative-identicon": "^2.12.1",
     "@subwallet/react-ui": "^5.1.2-b4",
     "@types/shallowequal": "^1.1.1",
@@ -56,6 +57,7 @@
     "react-native-super-ellipse-mask": "^1.0.7",
     "react-native-svg": "^12.5.1",
     "react-native-svg-transformer": "^1.0.0",
+    "react-native-tooltiplize": "^0.3.0",
     "shallowequal": "^1.1.0",
     "utility-types": "^3.10.0"
   },
