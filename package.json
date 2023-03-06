@@ -51,7 +51,6 @@
     "react-native-codegen": "^0.0.7",
     "react-native-collapsible": "^1.6.0",
     "react-native-customizable-toast": "^0.1.7",
-    "react-native-fast-image": "^8.6.3",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-qrcode-svg": "^6.2.0",
     "react-native-super-ellipse-mask": "^1.0.7",
@@ -125,6 +124,7 @@
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
     "react-native-web": "^0.18.10",
+    "react-native-fast-image": "^8.6.3",
     "react-test-renderer": "18.2.0",
     "shell-utils": "^1.0.10",
     "ts-jest": "^29.0.3",
@@ -137,7 +137,9 @@
     "@react-native-community/segmented-control": ">= 2.2.2",
     "@react-native-community/slider": ">= 4.3.3",
     "@react-native-picker/picker": "^2.4.8",
-    "react-native-gesture-handler": "^2.8.0"
+    "react-native-gesture-handler": "^2.8.0",
+    "react-native-reanimated": "^2.14.4",
+    "react-native-fast-image": "^8.6.3"
   },
   "scripts": {
     "lint": "npm run tslint && npm run srclint && npm run applint",
