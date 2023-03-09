@@ -1,8 +1,9 @@
 import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
 import { Theme } from '../../style'
-const { height: SCREEN_HEIGHT } = Dimensions.get('window')
+const { width, height: SCREEN_HEIGHT } = Dimensions.get('window')
 
 export interface ModalStyle {
+  rootView: ViewStyle
   container: ViewStyle
   line: ViewStyle
   headerButton: ViewStyle
@@ -11,14 +12,21 @@ export interface ModalStyle {
 
 export default (theme: Theme) =>
   StyleSheet.create<ModalStyle>({
-    container: {
+    rootView: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width,
       height: SCREEN_HEIGHT,
+    },
+    container: {
+      height: '100%',
       width: '100%',
       backgroundColor: 'white',
       position: 'absolute',
       top: SCREEN_HEIGHT,
       borderRadius: theme.borderRadiusXL,
-      zIndex: 9999999999999999,
+      zIndex: 9999999999,
     },
     line: {
       width: 75,

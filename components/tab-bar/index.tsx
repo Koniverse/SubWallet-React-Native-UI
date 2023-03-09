@@ -1,6 +1,6 @@
 import React from 'react'
 import { SafeAreaView, View } from 'react-native'
-import { WithTheme } from '../style'
+import { PartialTheme, WithTheme } from '../style'
 import { TabBarProps } from './PropsType'
 import TabBarStyles, { TabBarStyle } from './style/index'
 import TabBarItem from './TabBarItem'
@@ -18,7 +18,7 @@ class TabBar extends React.Component<TabBarNativeProps, any> {
 
   static Item = TabBarItem
 
-  getPanes(styles: ReturnType<typeof TabBarStyles>, content: boolean) {
+  getPanes(styles: PartialTheme, content: boolean) {
     const { tintColor, unselectedTintColor, children } = this.props
     // ios 规则： selected 为多个则只选中最后一个， selected 为 0 个则选中第一个;
     let selectedIndex = 0

@@ -198,7 +198,7 @@ const AntmSwitch = ({
                   ]}>
                   {loading && (
                     <RNActivityIndicator
-                      color={Color}
+                      indicatorColor="black"
                       size={18}
                       styles={{
                         spinner: {

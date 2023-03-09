@@ -11,7 +11,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import { Theme, WithTheme, WithThemeStyles } from '../style'
+import { PartialTheme, WithTheme, WithThemeStyles } from '../style'
 import { TabBarPropsType, TabData } from './PropsType'
 import TabBarStyles, { TabBarStyle } from './style'
 
@@ -161,8 +161,8 @@ export class DefaultTabBar extends React.PureComponent<PropsType, StateType> {
     index: number,
     width: number,
     onLayoutHandler: any,
-    styles: ReturnType<typeof TabBarStyles>,
-    theme: Theme,
+    styles: PartialTheme,
+    theme: PartialTheme,
   ) => {
     const {
       tabBarActiveTextColor: activeTextColor,
@@ -217,7 +217,7 @@ export class DefaultTabBar extends React.PureComponent<PropsType, StateType> {
     this.updateView({ value: this.props.scrollValue._value })
   }
 
-  getTabs = (styles: TabBarStyle, theme: Theme) => {
+  getTabs = (styles: PartialTheme, theme: PartialTheme) => {
     const { tabs, page = 0 } = this.props
     return tabs.map(({ name }, index) => {
       let tab = { title: name } as TabData
@@ -237,7 +237,7 @@ export class DefaultTabBar extends React.PureComponent<PropsType, StateType> {
     })
   }
 
-  getUnderLine = (styles: TabBarStyle) => {
+  getUnderLine = (styles: PartialTheme) => {
     const { tabBarUnderlineStyle, renderUnderline } = this.props
 
     const tabUnderlineStyle = {

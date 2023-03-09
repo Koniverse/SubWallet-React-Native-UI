@@ -1,3 +1,4 @@
+import { Info } from 'phosphor-react-native'
 import React from 'react'
 import {
   NativeSyntheticEvent,
@@ -10,7 +11,7 @@ import {
 } from 'react-native'
 import { Omit } from 'utility-types'
 import Icon from '../icon'
-import { Theme, WithTheme, WithThemeStyles } from '../style'
+import { PartialTheme, WithTheme, WithThemeStyles } from '../style'
 import { TextAreaItemPropsType } from './PropsType'
 import TextareaItemStyles, { TextareaItemStyle } from './style/index'
 export type TextInputProps = Omit<
@@ -73,7 +74,7 @@ export default class TextAreaItem extends React.Component<
   }
 
   onContentSizeChange =
-    (theme: Theme) =>
+    (theme: PartialTheme) =>
     (event: {
       nativeEvent: { contentSize: { width: number; height: number } }
     }) => {
@@ -96,7 +97,7 @@ export default class TextAreaItem extends React.Component<
         onContentSizeChange(event)
       }
     }
-  getHeight = (theme: Theme) => {
+  getHeight = (theme: PartialTheme) => {
     const { rows } = this.props
 
     if (this.state.height) {
@@ -172,10 +173,9 @@ export default class TextAreaItem extends React.Component<
                 <TouchableWithoutFeedback onPress={onErrorClick}>
                   <View style={[s.errorIcon]}>
                     <Icon
-                      name="info-circle"
-                      style={{
-                        color: theme.brand_error,
-                      }}
+                      type="phosphor"
+                      phosphorIcon={Info}
+                      iconColor={theme.colorError}
                     />
                   </View>
                 </TouchableWithoutFeedback>

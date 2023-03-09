@@ -1,4 +1,5 @@
 import { UltimateListView } from '@bang88/react-native-ultimate-listview'
+import { ArrowDown, ArrowUp } from 'phosphor-react-native'
 import React from 'react'
 import { ActivityIndicator, Platform, Text, View } from 'react-native'
 import Icon from '../icon'
@@ -122,8 +123,8 @@ class ListView<T> extends React.PureComponent<ListViewProps<T>, ListViewState> {
                 <ActivityIndicator />
               ) : (
                 <Icon
-                  name={status === 0 ? 'arrow-down' : 'arrow-up'}
-                  size={18}
+                  type="phosphor"
+                  phosphorIcon={status === 0 ? ArrowDown : ArrowUp}
                 />
               )}
               <Text style={{ marginLeft: 5 }}>

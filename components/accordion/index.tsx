@@ -1,3 +1,4 @@
+import { ArrowUp } from 'phosphor-react-native'
 import React from 'react'
 import { StyleProp, Text, View, ViewStyle } from 'react-native'
 import RNAccordion, { AccordionProps } from 'react-native-collapsible/Accordion'
@@ -36,24 +37,22 @@ class Accordion<T extends AccordionHeader> extends React.Component<
 > {
   static Panel = AccordionPanel
 
-  renderHeader =
-    (styles: ReturnType<typeof AccordionStyles>) =>
-    (section: T, _: number, isActive: boolean) => {
-      return (
-        <View style={[styles.header, section.style]}>
-          {React.isValidElement(section.title) ? (
-            section.title
-          ) : (
-            <View style={styles.headerWrap}>
-              <Text style={styles.headerText}>{section.title}</Text>
-            </View>
-          )}
-          <View style={styles.arrow}>
-            <Icon name={isActive ? 'up' : 'down'} style={styles.arrow} />
+  renderHeader = (styles: AccordionStyle) => (section: T, _: number) => {
+    return (
+      <View style={[styles.header, section.style]}>
+        {React.isValidElement(section.title) ? (
+          section.title
+        ) : (
+          <View style={styles.headerWrap}>
+            <Text style={styles.headerText}>{section.title}</Text>
           </View>
+        )}
+        <View style={styles.arrow}>
+          <Icon type="phosphor" phosphorIcon={ArrowUp} style={styles.arrow} />
         </View>
-      )
-    }
+      </View>
+    )
+  }
 
   renderContent =
     (styles: ReturnType<typeof AccordionStyles>) => (section: T) => {
@@ -83,7 +82,7 @@ class Accordion<T extends AccordionHeader> extends React.Component<
 
     return (
       <WithTheme themeStyles={AccordionStyles} styles={styles}>
-        {(s) => (
+        {(s: AccordionStyle) => (
           <View style={[s.container, style]}>
             <RNAccordion
               underlayColor="transparent"

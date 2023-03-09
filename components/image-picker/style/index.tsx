@@ -1,4 +1,5 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { Theme } from '../../style'
 
 export interface ImagePickerStyle {
   container: ViewStyle
@@ -13,7 +14,7 @@ export interface ImagePickerStyle {
   plusText: TextStyle
 }
 
-export default () =>
+export default (theme: Theme) =>
   StyleSheet.create<ImagePickerStyle>({
     container: {
       flexWrap: 'wrap',
@@ -24,8 +25,8 @@ export default () =>
       height: 80,
     },
     item: {
-      marginRight: 40,
-      marginBottom: 40,
+      marginRight: theme.marginMD,
+      marginBottom: theme.marginMD,
       overflow: 'hidden',
     },
     image: {

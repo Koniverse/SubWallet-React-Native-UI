@@ -1,9 +1,21 @@
-import React, { useCallback, useImperativeHandle } from 'react'
-import { Dimensions, StyleProp, View, ViewStyle } from 'react-native'
-import { Gesture, GestureDetector } from 'react-native-gesture-handler'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useImperativeHandle } from 'react'
+import {
+  Dimensions,
+  StyleProp,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native'
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from 'react-native-gesture-handler'
 import Animated, {
   Extrapolate,
   interpolate,
+  runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -13,9 +25,12 @@ import ModalStyles, { ModalStyle } from './style'
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 
-const MAX_TRANSLATE_Y = -SCREEN_HEIGHT + 10
+const MAX_TRANSLATE_Y = -SCREEN_HEIGHT
 
 export interface SWModalProps extends WithThemeStyles<ModalStyle> {
+  isVisible: boolean
+  setVisible: (arg0: boolean) => void
+  height: number
   children?: React.ReactNode
   wrapperStyle?: StyleProp<ViewStyle>
 }
@@ -25,16 +40,33 @@ export type SWModalRefProps = {
   isActive: () => boolean
 }
 
-const SWModal = React.forwardRef<SWModalRefProps, SWModalProps>(
-  ({ children, styles, wrapperStyle }, ref) => {
+const ModalBase = React.forwardRef<SWModalRefProps, SWModalProps>(
+  ({ isVisible, setVisible, height, children, styles, wrapperStyle }, ref) => {
     const translateY = useSharedValue(0)
     const active = useSharedValue(false)
+
+    useEffect(() => {
+      if (isVisible) {
+        scrollTo(-height)
+      }
+    }, [isVisible])
 
     const scrollTo = useCallback((destination: number) => {
       'worklet'
       active.value = destination !== 0
 
-      translateY.value = withSpring(destination, { damping: 12 })
+      translateY.value = withSpring(
+        destination,
+        {
+          damping: 25,
+          stiffness: 340,
+        },
+        () => {
+          if (destination === 0 && setVisible) {
+            runOnJS(setVisible)(false)
+          }
+        },
+      )
     }, [])
 
     const isActive = useCallback(() => {
@@ -56,9 +88,9 @@ const SWModal = React.forwardRef<SWModalRefProps, SWModalProps>(
         translateY.value = Math.max(translateY.value, MAX_TRANSLATE_Y)
       })
       .onEnd(() => {
-        if (translateY.value > -SCREEN_HEIGHT / 2) {
+        if (translateY.value > context.value.y + 40) {
           scrollTo(0)
-        } else if (translateY.value < -SCREEN_HEIGHT / 2) {
+        } else if (translateY.value < context.value.y - 40) {
           scrollTo(MAX_TRANSLATE_Y)
         }
       })
@@ -66,7 +98,7 @@ const SWModal = React.forwardRef<SWModalRefProps, SWModalProps>(
     const rSWModalStyle = useAnimatedStyle(() => {
       const borderRadius = interpolate(
         translateY.value,
-        [MAX_TRANSLATE_Y + 10, MAX_TRANSLATE_Y],
+        [height, MAX_TRANSLATE_Y],
         [25, 5],
         Extrapolate.CLAMP,
       )
@@ -79,13 +111,36 @@ const SWModal = React.forwardRef<SWModalRefProps, SWModalProps>(
 
     const renderModal = (_styles: ModalStyle) => {
       return (
-        <GestureDetector gesture={gesture}>
+        <GestureHandlerRootView style={isVisible && _styles.rootView}>
+          <GestureDetector gesture={gesture}>
+            <Animated.View
+              style={[_styles.container, wrapperStyle, rSWModalStyle]}>
+              <View style={_styles.line} />
+              {children}
+            </Animated.View>
+          </GestureDetector>
           <Animated.View
-            style={[_styles.container, rSWModalStyle, wrapperStyle]}>
-            <View style={_styles.line} />
-            {children}
+            style={{
+              backgroundColor: 'blue',
+              opacity: interpolate(
+                translateY.value,
+                [0, -299, -height],
+                [0, 0, 1],
+                Extrapolate.CLAMP,
+              ),
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}>
+            <TouchableOpacity
+              activeOpacity={0}
+              style={{ flex: 1 }}
+              onPress={() => scrollTo(0)}
+            />
           </Animated.View>
-        </GestureDetector>
+        </GestureHandlerRootView>
       )
     }
 
@@ -97,4 +152,4 @@ const SWModal = React.forwardRef<SWModalRefProps, SWModalProps>(
   },
 )
 
-export default SWModal
+export default ModalBase

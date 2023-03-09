@@ -494,7 +494,7 @@ class Carousel extends React.PureComponent<CarouselProps, CarouselState> {
     }
     return (
       <WithTheme themeStyles={CarouselStyles} styles={this.props.styles}>
-        {(styles) => {
+        {(styles: CarouselStyle) => {
           return pagination({
             styles,
             vertical,

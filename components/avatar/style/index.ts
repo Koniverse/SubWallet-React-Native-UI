@@ -1,11 +1,11 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { Theme } from '../../style'
+// import { Theme } from '../../style'
 
 export interface AvatarStyle {
   container: ViewStyle
 }
 
-export default (theme: Theme) =>
+export default () =>
   StyleSheet.create<AvatarStyle>({
     container: {},
   })
