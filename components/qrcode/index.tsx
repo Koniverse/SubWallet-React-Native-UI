@@ -39,7 +39,7 @@ const QRCode: React.FC<SWQRCodeProps> = ({
         />
         {status === 'loading' && (
           <View style={_style.expired}>
-            <ActivityIndicator size={12} />
+            <ActivityIndicator size={12} indicatorColor="black" />
           </View>
         )}
         {status === 'expired' && (

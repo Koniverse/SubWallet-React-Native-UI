@@ -1,3 +1,4 @@
+import { Info, X } from 'phosphor-react-native'
 import React from 'react'
 import {
   GestureResponderEvent,
@@ -247,7 +248,7 @@ export default class InputItem extends React.Component<
                   style={[s.clear]}
                   onPress={this.onInputClear}
                   hitSlop={{ top: 5, left: 5, bottom: 5, right: 5 }}>
-                  <Icon name="close" color={'white'} size={'xxs'} />
+                  <Icon type="phosphor" phosphorIcon={X} />
                 </TouchableOpacity>
               ) : null}
               {extra ? (
@@ -264,12 +265,7 @@ export default class InputItem extends React.Component<
               {error && (
                 <TouchableWithoutFeedback onPress={onErrorClick}>
                   <View style={[s.errorIcon]}>
-                    <Icon
-                      name="info-circle"
-                      style={{
-                        color: theme.brand_error,
-                      }}
-                    />
+                    <Icon type="phosphor" phosphorIcon={Info} />
                   </View>
                 </TouchableWithoutFeedback>
               )}

@@ -1,11 +1,11 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { Theme } from '../../style'
+// import { Theme } from '../../style'
 
 export interface LogoStyle {
   subLogoContainer: ViewStyle
 }
 
-export default (theme: Theme) =>
+export default () =>
   StyleSheet.create<LogoStyle>({
     subLogoContainer: { position: 'absolute', bottom: 0, right: 0 },
   })

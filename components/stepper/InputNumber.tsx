@@ -8,7 +8,7 @@ import {
   View,
   ViewStyle,
 } from 'react-native'
-import StepperStyles from './style'
+import { PartialTheme } from '../style'
 
 function noop() {}
 
@@ -47,7 +47,7 @@ export interface InputNumberProps {
   value?: number
   defaultValue?: number
   autoFocus?: boolean
-  styles: ReturnType<typeof StepperStyles>
+  styles: PartialTheme
   upStyle?: StyleProp<ViewStyle>
   downStyle?: StyleProp<ViewStyle>
   inputStyle?: StyleProp<TextStyle>

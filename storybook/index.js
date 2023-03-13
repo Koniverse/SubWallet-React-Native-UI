@@ -4,7 +4,7 @@ import {
   configure,
   getStorybookUI,
 } from '@storybook/react-native'
-const stories = require('../components')
+const stories = require('./stories')
 
 import './rn-addons'
 

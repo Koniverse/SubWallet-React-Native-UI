@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import { WithTheme, WithThemeStyles } from '../style'
+import { PartialTheme, WithTheme, WithThemeStyles } from '../style'
 import { CameraRollPickerProps } from './CameraRollPicker'
 import ImageRoll, { ImageRollTexts } from './ImageRoll'
 import { ImagePickerPropTypes } from './PropsType'
@@ -40,13 +40,13 @@ export default class ImagePicker extends React.Component<
     }
   }
 
-  onPressIn = (styles: ReturnType<typeof ImagePickerStyles>) => () => {
+  onPressIn = (styles: PartialTheme) => () => {
     this.plusWrap.setNativeProps({
       style: [styles.item, styles.size, styles.plusWrapHighlight],
     })
   }
 
-  onPressOut = (styles: ReturnType<typeof ImagePickerStyles>) => () => {
+  onPressOut = (styles: PartialTheme) => () => {
     this.plusWrap.setNativeProps({
       style: [styles.item, styles.size, styles.plusWrapNormal],
     })

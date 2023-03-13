@@ -35,7 +35,7 @@ export const useTheme = (props: UseThemeContextProps = {}) => {
   return { ...theme, ...props.theme }
 }
 
-export interface WithThemeProps<T, S> {
+export interface WithThemeProps<T> {
   themeStyles?: (theme: PartialTheme) => T
   styles?: PartialTheme
   children: (
@@ -50,7 +50,7 @@ export interface WithThemeProps<T, S> {
  */
 export type WithThemeStyles<T> = { styles?: Partial<T> }
 
-export function WithTheme<T, S>(props: WithThemeProps<T, S>) {
+export function WithTheme<T>(props: WithThemeProps<T>) {
   const { children, themeStyles, styles } = props
 
   const stylesRef = React.useRef<PartialTheme | undefined>(undefined)

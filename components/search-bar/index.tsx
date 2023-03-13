@@ -1,3 +1,4 @@
+import { FileSearch } from 'phosphor-react-native'
 import React from 'react'
 import {
   NativeSyntheticEvent,
@@ -10,11 +11,11 @@ import {
   View,
 } from 'react-native'
 import Icon from '../icon'
+import { LocaleContext } from '../locale-provider'
 import { WithTheme, WithThemeStyles } from '../style'
 import { getComponentLocale } from '../_util/getLocale'
 import { defaultProps, SearchBarPropsType, SearchBarState } from './PropsType'
 import SearchBarStyles, { SearchBarStyle } from './style/index'
-import { LocaleContext } from '../locale-provider'
 
 export interface SearchBarProps
   extends SearchBarPropsType,
@@ -142,7 +143,11 @@ export default class SearchBar extends React.Component<
                 onBlur={this.onBlur}
               />
             </View>
-            <Icon name="search" style={_styles.search} />
+            <Icon
+              type="phosphor"
+              phosphorIcon={FileSearch}
+              style={_styles.search}
+            />
             {_showCancelButton && (
               <View style={_styles.cancelTextContainer}>
                 <Text style={_styles.cancelText} onPress={this.onCancel}>

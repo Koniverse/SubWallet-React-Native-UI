@@ -28,9 +28,9 @@ import { Icon } from '..'
 import { PartialTheme, WithTheme, WithThemeStyles } from '../style'
 import ToastStyles, { ToastStyle } from './style'
 
-export type NotificationType = 'success' | 'info' | 'warning' | 'error'
+type NotificationType = 'success' | 'info' | 'warning' | 'error'
 
-export interface CustomToastComponentProps extends WithThemeStyles<ToastStyle> {
+interface CustomToastComponentProps extends WithThemeStyles<ToastStyle> {
   message: React.ReactNode
   duration?: number
   type?: NotificationType
@@ -117,7 +117,7 @@ const CustomToastComponent: React.FC<CustomToastComponentProps> = ({
   )
 }
 
-export const CustomToasterHelper = {
+const Toast = {
   show: (options: CustomToastComponentProps) => {
     const { autoHide = true, duration = 3000 } = options
     const id = CustomToasterRef.current?.show(options)!
@@ -142,12 +142,10 @@ const getPlacement = {
   bottomLeft: [SlideInLeft, SlideOutLeft],
   bottomRight: [SlideInRight, SlideOutRight],
 }
-export interface CustomToasterProps {
+interface CustomToasterProps {
   placement: NotificationPlacement
 }
-export const CustomToaster: React.FC<CustomToasterProps> = ({
-  placement = 'top',
-}) => {
+const ToastWrapper: React.FC<CustomToasterProps> = ({ placement = 'top' }) => {
   return (
     <ToasterBase
       entering={getPlacement[placement][0]}
@@ -157,4 +155,12 @@ export const CustomToaster: React.FC<CustomToasterProps> = ({
       render={CustomToastComponent}
     />
   )
+}
+
+export {
+  NotificationType,
+  CustomToastComponentProps,
+  Toast,
+  CustomToasterProps,
+  ToastWrapper,
 }

@@ -63,7 +63,6 @@ const InternalRadio = (
           ref={ref}
           indeterminate={false}
           onChange={onInternalChange}
-          styles={_styles}
         />
       )}
     </WithTheme>

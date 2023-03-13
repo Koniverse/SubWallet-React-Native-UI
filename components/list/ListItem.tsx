@@ -1,3 +1,4 @@
+import { ArrowDown, ArrowRight, ArrowUp } from 'phosphor-react-native'
 import React from 'react'
 import {
   GestureResponderEvent,
@@ -192,9 +193,9 @@ export default class Item extends React.Component<ListItemProps, any> {
           }
 
           const arrEnum = {
-            horizontal: <Icon name="right" style={itemStyles.Arrow} />,
-            down: <Icon name="down" style={itemStyles.ArrowV} />,
-            up: <Icon name="up" style={itemStyles.ArrowV} />,
+            horizontal: <Icon type="phosphor" phosphorIcon={ArrowRight} />,
+            down: <Icon type="phosphor" phosphorIcon={ArrowDown} />,
+            up: <Icon type="phosphor" phosphorIcon={ArrowUp} />,
           }
 
           const itemView = (

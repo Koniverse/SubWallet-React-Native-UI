@@ -1,8 +1,9 @@
 {
-  "name": "@ant-design/react-native",
-  "version": "5.0.3",
-  "description": "基于蚂蚁金服移动设计规范的 React Native 组件库",
+  "name": "subwallet-react-native-ui",
+  "version": "5.0.7",
+  "description": "React Native UI Kit for SubWallet",
   "keywords": [
+    "SubWallet",
     "ant",
     "design",
     "react",
@@ -17,19 +18,21 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ant-design/ant-design-mobile-rn"
+    "url": "https://github.com/Koniverse/SubWallet-React-Native-UI"
   },
   "bugs": {
-    "url": "https://github.com/ant-design/ant-design-mobile-rn/issues"
+    "url": "https://github.com/Koniverse/SubWallet-React-Native-UI/issues"
   },
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "react-native": "components/index.tsx",
+  "types": "lib/typescript/components/index.d.ts",
   "files": [
+    "components",
     "lib",
-    "es",
     "react-native.config.js"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "es/index.js",
   "dependencies": {
     "@bang88/react-native-ultimate-listview": "^4.1.0",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
@@ -106,7 +109,6 @@
     "lint-staged": "^13.1.0",
     "metro-react-native-babel-preset": "^0.73.4",
     "mockdate": "^3.0.5",
-    "patch-package": "^6.5.0",
     "postinstall-postinstall": "^2.1.0",
     "pre-commit": "^1.2.2",
     "prop-types": "^15.8.1",
@@ -117,6 +119,8 @@
     "react-github-button": "^0.1.11",
     "react-intl": "^6.2.5",
     "react-native": "0.70.6",
+    "react-native-builder-bob": "^0.20.4",
+    "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.8.0",
     "react-native-mocker": "^0.0.12",
     "react-native-modal-popover": "2.1.0",
@@ -124,7 +128,6 @@
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
     "react-native-web": "^0.18.10",
-    "react-native-fast-image": "^8.6.3",
     "react-test-renderer": "18.2.0",
     "shell-utils": "^1.0.10",
     "ts-jest": "^29.0.3",
@@ -137,9 +140,9 @@
     "@react-native-community/segmented-control": ">= 2.2.2",
     "@react-native-community/slider": ">= 4.3.3",
     "@react-native-picker/picker": "^2.4.8",
+    "react-native-fast-image": "^8.6.3",
     "react-native-gesture-handler": "^2.8.0",
-    "react-native-reanimated": "^2.14.4",
-    "react-native-fast-image": "^8.6.3"
+    "react-native-reanimated": "^2.14.4"
   },
   "scripts": {
     "lint": "npm run tslint && npm run srclint && npm run applint",
@@ -147,18 +150,13 @@
     "tslint": "eslint components --fix && npm run compile && rm -rf lib",
     "applint": "eslint rn-kitchen-sink --ext '.js' --fix",
     "pre-publish": "npm run test:all",
-    "prepublish": "antd-tools run guard",
-    "prepare": "antd-tools run guard",
-    "prepublishOnly": "antd-tools run guard",
+    "prepack": "bob build",
     "test": "jest --config .jest.config.js",
     "test:all": "./scripts/test-all.sh",
-    "compile": "cross-env BABEL_ENV=dist antd-tools run compile",
     "watch-tsc": "tsc --watch",
-    "clean": "antd-tools run clean",
     "start": "cross-env NODE_ENV=development cross-env DEMO_ENV=react bisheng start -c ./site/bisheng.desktop.config.js",
     "site": "cross-env NODE_ENV=production cross-env DEMO_ENV=react bisheng build -c ./site/bisheng.desktop.config.js && cp CNAME _site",
     "deploy": "npm run clean && npm run site && bisheng gh-pages --push-only",
-    "pub": "cross-env BABEL_ENV=dist antd-tools run pub",
     "rn-start": "node scripts/start.js",
     "ios-storybook": "./scripts/build-mobile-with-storybook.sh storybook && npm run ios",
     "android-storybook": "./scripts/build-mobile-with-storybook.sh storybook && npm run android",
@@ -171,8 +169,6 @@
     "lint-staged": "lint-staged",
     "lint-staged:ts": "npm run tsc && eslint components/**/*.tsx",
     "lint-staged:es": "eslint ./.eslintrc.js",
-    "tsc": "antd-tools run tsc",
-    "postinstall": "patch-package",
     "storybook": "start-storybook -p 7007",
     "build-storybook": "build-storybook"
   },
@@ -190,5 +186,18 @@
   ],
   "resolutions": {
     "graceful-fs": "^4.2.4"
-  }
+  },
+  "react-native-builder-bob": {
+    "source": "components",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "lib/"
+  ]
 }

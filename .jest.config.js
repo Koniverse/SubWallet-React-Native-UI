@@ -18,6 +18,7 @@ module.exports = {
   "setupFiles": ["./jestSetup.js"],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testPathIgnorePatterns: ['/node_modules/', '_site', 'site'],
+  modulePathIgnorePatterns: ["<rootDir>/lib/"],
   transform: {
     ...tsjPreset.transform,
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',

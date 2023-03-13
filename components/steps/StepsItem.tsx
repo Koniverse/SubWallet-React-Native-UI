@@ -1,4 +1,6 @@
 /* tslint:disable: jsx-no-multiline-js */
+import { faEllipsis } from '@fortawesome/free-solid-svg-icons'
+import { Check, X } from 'phosphor-react-native'
 import React from 'react'
 import { StyleProp, Text, View, ViewStyle } from 'react-native'
 import Icon from '../icon'
@@ -50,7 +52,7 @@ export default class StepsItem extends React.Component<StepsItemProps, any> {
     const error = status === 'error'
     return (
       <WithTheme>
-        {(_, theme) => {
+        {(_) => {
           let headCls: string = ''
           let tailTopCls: string = ''
           let tailBottomCls: string = ''
@@ -91,16 +93,16 @@ export default class StepsItem extends React.Component<StepsItemProps, any> {
             if (starting) {
               iconSource = (
                 <Icon
-                  name="check"
-                  color={theme.color_icon_base}
+                  type="phosphor"
+                  phosphorIcon={Check}
                   style={styles[`icon${sizeCls}`]}
                 />
               )
             } else if (waiting) {
               iconSource = (
                 <Icon
-                  name="ellipsis"
-                  color={theme.color_icon_base}
+                  type="phosphor"
+                  fontawesomeIcon={faEllipsis}
                   style={styles[`icon${sizeCls}`]}
                 />
               )
@@ -110,8 +112,8 @@ export default class StepsItem extends React.Component<StepsItemProps, any> {
             } else if (error) {
               iconSource = (
                 <Icon
-                  name="close"
-                  color={theme.color_icon_base}
+                  type="phosphor"
+                  phosphorIcon={X}
                   style={styles[`icon${sizeCls}`]}
                 />
               )

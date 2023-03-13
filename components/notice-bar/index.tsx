@@ -1,3 +1,4 @@
+import { Voicemail } from 'phosphor-react-native'
 import React from 'react'
 import {
   StyleProp,
@@ -50,11 +51,11 @@ export default class NoticeBar extends React.Component<NoticeNativeProps, any> {
 
     return (
       <WithTheme styles={this.props.styles} themeStyles={NoticeStyles}>
-        {(styles, theme) => {
+        {(styles) => {
           let operationDom: any = null
           icon =
             typeof icon === 'undefined' ? (
-              <Icon name="sound" color={theme.brand_warning} />
+              <Icon type="phosphor" phosphorIcon={Voicemail} />
             ) : (
               icon
             )

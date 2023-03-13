@@ -1,3 +1,4 @@
+import { Tabs } from 'phosphor-react-native'
 import React, { isValidElement } from 'react'
 import {
   Image,
@@ -8,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native'
-import Icon, { IconProps } from '../icon'
+import Icon from '../icon'
 import { TabBarIcon } from './PropsType'
 import TabBarItemStyles from './style'
 
@@ -67,7 +68,7 @@ export default class TabBarItem extends React.Component<TabBarItemProps, any> {
           <View>
             {source === null ? null : isValidElement(source) ? (
               isIcon ? (
-                <Icon color={color} {...(source.props as IconProps)} />
+                <Icon type="phosphor" phosphorIcon={Tabs} />
               ) : (
                 source
               )

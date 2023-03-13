@@ -1,3 +1,4 @@
+import { CheckCircle } from 'phosphor-react-native'
 import React, { Component } from 'react'
 import {
   Dimensions,
@@ -41,7 +42,11 @@ class ImageItem extends Component<ImageItemProps, {}> {
     const marker = selectedMarker ? (
       selectedMarker
     ) : (
-      <Icon name="check-circle" style={[styles.marker]} />
+      <Icon
+        type="phosphor"
+        phosphorIcon={CheckCircle}
+        style={[styles.marker]}
+      />
     )
     const image = item.node.image
     return (
